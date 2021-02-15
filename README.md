@@ -7,6 +7,6 @@ Originally, scripts should be run on Fedora. This repository will be expanded fr
 ## Installation
 
 ```sh
-curl -s -L git.io/fdr | sh
+curl -s -L git.io/in.sh | sh
 ```
 
