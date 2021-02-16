@@ -6,7 +6,20 @@ Originally, scripts should be run on Fedora. This repository will be expanded fr
 
 ## Installation
 
+The laziest way is run one of the following:
+
 ```sh
-curl -s -L git.io/in.sh | sh
+# for curl
+sh <(curl -fsSL git.io/in.sh)
+# for wget
+sh <(wget -qO- git.io/in.sh)
 ```
 
+You could install script locally and then run, for example:
+
+```sh
+curl -LO git.io/in.sh
+sh in.sh
+```
+
+That's it.
