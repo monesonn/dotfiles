@@ -1,20 +1,24 @@
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#!/bin/sh
+# Post-Installation Scripts for Fedora (PISfF)
+# by Stanley <git.io/monesonn>
+# Description:  Autoinstalls usefull packages, dotfiles, etc; and autoconfigure it.welc
+# License: GNU GPLv3
 
 # Some variables to initialize colors for colorfull echo output
 BLUE='\033[1;34m'
 CYAN='\033[1;36m'
 NC='\033[0m' # No Color
+dotfilesrepo="https://github.com/monesonn/dotfiles.git"
+
+# progress bar function
+progressbar() {
+    local w=80 p=$1;  shift
+    # create a string of spaces, then change them to dots
+    printf -v dots "%*s" "$(( $p*$w/100 ))" ""; dots=${dots// /.};
+    # print those dots on a fixed-width space plus the percentage etc. 
+    printf "\r\e[K|%-*s| %3d %% %s" "$w" "$dots" "$p" "$*"; 
+}
+quit() { echo -e "\x1b[2J \x1b[0H ${purp}<3 \x1b[?25h \x1b[u \x1b[m"; }
 
 #
 #   THE POINT TO START
@@ -30,24 +34,24 @@ cat << 'EOF'
 
 EOF
 
-cat << EOF
-Hello, $USER. Press [ENTER] to execute script...
-EOF
-
-read -n 1 -s -r -p ""
-
-# progress bar function
-progressbar() {
-    local w=80 p=$1;  shift
-    # create a string of spaces, then change them to dots
-    printf -v dots "%*s" "$(( $p*$w/100 ))" ""; dots=${dots// /.};
-    # print those dots on a fixed-width space plus the percentage etc. 
-    printf "\r\e[K|%-*s| %3d %% %s" "$w" "$dots" "$p" "$*"; 
-}
+read -r -p "Hi, $USER, do you want to execute it? [Y/n] " input
+ 
+case $input in
+    [yY][eE][sS]|[yY])
+echo "Go forward! It will start soon"
+ ;;
+    [nN][oO]|[nN])
+ exit 1
+       ;;
+    *)
+ echo "Invalid input..."
+ exit 1
+ ;;
+esac
 
 for x in {1..100} ; do
     progressbar "$x"
-    sleep .01   # do some work here
+    sleep .05   # do some work here
 done ; echo ; clear
 
 curl -s -L http://bit.ly/10hA8iC | bash
@@ -72,6 +76,20 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 # 
 #   PACKAGES
 # 
+
+# Debloat default gnome installation
+sudp dnf remove -y  totem `# Gnome Videos`\
+                    gnome-photos `# Gnome Photos`\
+                    cheese `# Selfie application, hmm` \
+                    gnome-contacts `# It's cool, that we can have contacts in our computer, but it almost useless`\
+                    eog `# Eye-of-Gnome is an image viewer, feh is better` \
+                    rhythmbox `# Gnome music player, use Lollypop or lighweight cmus instead` \
+                    brltty `# Braile display` \
+                    yelp `# Gnome help browser`
+                    # anaconda\* `# Anaconda installer`
+
+sudo dnf group remove -y "Fonts" # Delete unnecessary fonts  
+
 sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     protonvpn-cli `# highly-recommended cli tool for ProtonVPN provider, change external ip from terminal for free...` \
                     translate-shell `# translate anything from terminal` \
@@ -109,7 +127,6 @@ sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     vim `# VI-like editor` \
                     neovim `# replacement for vim, best text editor, highly customizable by configuration file and plugins` \
                     wl-clipboard `# x-clip for Wayland, copy file content to buffer` \
-                    pv \
                     gnome-tweaks `# additional settings for Gnome` \
                     papirus-icon-theme `# icon theme` \
                     materia-gtk-theme `# GTK-theme for Gnome` \
@@ -118,7 +135,12 @@ sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     mpv `# media player` \
                     seahorse `# manager for ssh and gpg keys` \
                     ffmpeg `# ffmpeg` \
-                    youtube-dl `# usefull tool for downloading videos from different platforms` 
+                    youtube-dl `# usefull tool for downloading videos from different platforms` \
+                    tmux `# Terminal multiplexer` \
+                    sox \
+                    dejavu-sans-mono-fonts \
+                    wofi \
+                    dejavu-serif-fonts  \
                     # move forward! ->
   
 #
