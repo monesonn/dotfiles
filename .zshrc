@@ -227,9 +227,7 @@ alias push='git push origin'
 alias status='git status'
 alias tag='git tag'
 alias newtag='git tag -a'
-alias dotfiles='git --git-dir=$DOTFILES_DIR --work-tree=$HOME'
 alias config="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
-# alias dotinit() {mkdir -p $DOTFILES_DIR ; git init --bare $DOTFILES_DIR ; config config --local status.showUntrackedFiles no ; }
 
 # Configuration
 alias rnrc="$EDITOR $HOME/.config/ranger/rc.conf"
