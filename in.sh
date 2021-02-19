@@ -140,15 +140,20 @@ sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     sox \
                     dejavu-sans-mono-fonts \
                     dejavu-serif-fonts  \
-                    playerctl `# for controlling audio`\
+                    playerctl `# for controlling audio` \
+                    gnome-shell-extension-pop-shell `# make gnome tilling` \
                     # move forward! ->
   
 #
 #   SOME THINGS
 #
-sleep 3s ; clear ; echo -e "${BLUE}Installing VIM-plug for vim and neovim${NC}" ; sleep 3s
+sleep 3s ; clear ; echo -e "${BLUE}Setting up VIM-plug${NC}" ; sleep 3s
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' # nvim
+
+echo -e "${BLUE}Installing VIM-plig${NC}"
+vim +'PlugInstall --sync' +qa
+nvim +'PlugInstall --sync' +qa
 
 echo -e "\n${BLUE}Installing NVM and Deno${NC}" ; sleep 3s
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash # NVM
