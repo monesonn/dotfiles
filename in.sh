@@ -139,8 +139,8 @@ sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     tmux `# Terminal multiplexer` \
                     sox \
                     dejavu-sans-mono-fonts \
-                    wofi \
                     dejavu-serif-fonts  \
+                    playerctl `# for controlling audio`\
                     # move forward! ->
   
 #
