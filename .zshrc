@@ -11,7 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 export HISTSIZE=1000
 export EDITOR="nvim"
-export DOTFILES_DIR="$HOME/dot"
+export DOTFILES_DIR="$HOME/.dotfiles"
 export VISUAL="$EDITOR"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -255,7 +255,7 @@ alias .3='cd ../../..'
 alias .4='cd ../../..'
 alias .5='cd ../../../..'
 alias .6='cd ../../../../..'
-alias .f='cd "$DOTFILES"'
+alias .f='cd "$DOTFILES_DIR"'
 alias bd='cd "$OLDPWD"'
 
 # Changing "ls" to "lsd" or "exa"
