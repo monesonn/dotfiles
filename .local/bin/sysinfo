@@ -16,7 +16,7 @@ distro=`uname -n`
 kernel=`uname -r | sed 's/\-.*/ /'`
 de=gnome
 pkgs=`dnf list installed | wc -l`
-font='cherry'
+font='terminus'
 
 # progress bar
 draw()
