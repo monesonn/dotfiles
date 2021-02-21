@@ -85,10 +85,18 @@ sudp dnf remove -y  totem `# Gnome Videos`\
                     eog `# Eye-of-Gnome is an image viewer, feh is better` \
                     rhythmbox `# Gnome music player, use Lollypop or lighweight cmus instead` \
                     brltty `# Braile display` \
-                    yelp `# Gnome help browser`
+                    yelp `# Gnome help browser` \
+                    gnome-software \
+                    gnome-classic-session \
+                    flatpak \
+                    PackageKit \
+                    PackageKit-glib \
+                    sane-airscan \
+                    speech-dispatcher \
+                    cups \
                     # anaconda\* `# Anaconda installer`
 
-sudo dnf group remove -y "Fonts" # Delete unnecessary fonts  
+sudo dnf group remove -y "Fonts" "LibreOffice" # Delete unnecessary fonts  
 
 sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     protonvpn-cli `# highly-recommended cli tool for ProtonVPN provider, change external ip from terminal for free...` \

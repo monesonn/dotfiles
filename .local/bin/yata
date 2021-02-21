@@ -2,21 +2,25 @@
 # Author : Stanley <git.io/monesonn>
 
 # Script version
-__version="0.1.0-rc2"
+__version="0.1.0-rc3"
 
 # General variables
 
 # quiet mode is the default mode
 # ISQUIET="-q --console-title"
-ISQUIET=""
+IS_QUIET=""
 VERBOSE=0
 
 DIR=''
+PARSE_QUALITY=''
+YTDL_OUTPUT_TEMPLATE=''
+
 YTDL_BIN=`which youtube-dl`
-DEFAULT_DIR="$HOME/Music"
+DEFAULT_DIR="$HOME/Music/yata"
 PLAYLIST_DIR="${DEFAULT_DIR}/playlists"
 UPLOADER_DIR="${DEFAULT_DIR}/uploader"
-YTDL_OUTPUT_TEMPLATE=''
+
+IS_PLAYLIST=''
 YTDL_FORMAT='mp3'
 
 # Some variables to initialize colors for colorfull echo output
@@ -37,65 +41,62 @@ cat << EOF
 
  Description: CLI-wrapper for youtube-dl written on Shell
 
- Usage: $(basename $0) [OPTION] URL [URL...]
+ Usage: $(basename $0) [OPTIONS] -d [URL]
 
  Options:                       
   -h | --help | help            Show this message
   -v | --version | version      Show script version
-  -p | --playlist | playlist    Download playlist ...
-  -d | --download | download    Download video ... 
+  -p | --path | path            Set path [default: ~/Music/yata]
+  -e | --extension | extension  Set file extension 
+                                [mp3(default),best,aac,flac,m4a,opus,vorbis,wav]
+  -p | --playlist | playlist    Flag for playlists 
+  -q | --quality  | quality     .....
+  -v | --verbose  | verbose     Turn off quiet mode
+  -d | --download | download    Handle URL
 
- Example: yata -p url
+ Example: yata download url
 EOF
-}
-
-download_playlist() {
-  $YTDL_BIN \
-  ${ISQUIET} \
-  --embed-thumbnail \
-  --ignore-errors \
-  --extract-audio \
-  --no-overwrites \
-  --audio-format $YTDL_FORMAT \
-  --output "${DEFAULT_DIR}/playlists/%(playlist)s/${YTDL_OUTPUT_TEMPLATE}" \
-  "$1"
 }
 
 download() {
   $YTDL_BIN \
-  ${ISQUIET} \
+  ${IS_QUIET} \
+  ${PARSE_QUALITY} \
   --continue \
   --ignore-errors \
   --extract-audio \
   --no-overwrites \
   --embed-thumbnail \
   --audio-format $YTDL_FORMAT \
-  --output "${DEFAULT_DIR}/yata/${YTDL_OUTPUT_TEMPLATE}" \
+  ${IS_PLAYLIST} \
+  --output "${DIR}/${YTDL_OUTPUT_TEMPLATE}" \
   "$1"
+  exit 1
 }
 
 err_msg() { echo -e "${RED}$1${NC}"; }
 
 __main__() {
-  case $# in
-  0) _help ; exit 1 ;;
-  1) case $1 in
-      -h | --help | help) shift; _help ;;
-      -v | --version | version) shift; printf "$__version\n" ;;
-      # -p | --playlist | playlist)  ;;
-      *) err_msg "No such option: $1" ; exit 1 ;;
-    esac;;
-  2) 
-    if [[ "$1" == "-p" || "$1" == "--playlist" || "$1" == "playlist" ]]; then
-      YTDL_OUTPUT_TEMPLATE='%(playlist_index)s - %(title)s.%(ext)s'
-      download_playlist "$2"
-    elif [[ "$1" == "-d" || "$1" == "--download" || "$1" == "download" ]]; then
-      YTDL_OUTPUT_TEMPLATE='%(title)s.%(ext)s'
-      download "$2"
-    else err_msg "Input error." ; exit 1
-    fi;;  
-  *) err_msg "Input error, too many arguments.\nType yata [-h|--help|help] to see a list of all options." ; exit 1 ;;
-  esac
+  while [[ "$#" -gt 0 ]]; do
+    case $1 in
+      -h | --help | help) _help && exit 1;;
+      -v | --version | version) printf "$__version\n" && exit 1;;
+      -p | --playlist | playlist) 
+        DIR=$PLAYLIST_DIR
+        IS_PLAYLIST='--yes-playlist'
+        YTDL_OUTPUT_TEMPLATE='%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' ;;
+      -e | --extension | extension) YTDL_FORMAT="$2" ;;
+      -d | --download | download) download "$2" ;;
+      # *) err_msg "No such option: $1" ; exit 1 ;;
+    esac
+    # case $* 
+    #   err_msg "Input error, too many arguments.\nType yata [-h|--help|help] to see a list of all options." ; exit 1 ;;
+    # esac
+  shift
+  done
 }
 
+if [[ ${#} -eq 0 ]]; then
+  _help ; exit 1
+fi
 __main__ "$@" ; exit 0
