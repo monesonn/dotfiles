@@ -94,6 +94,7 @@ sudp dnf remove -y  totem `# Gnome Videos`\
                     sane-airscan \
                     speech-dispatcher \
                     cups \
+                    "telepahy-*" \
                     # anaconda\* `# Anaconda installer`
 
 sudo dnf group remove -y "Fonts" "LibreOffice" # Delete unnecessary fonts  
@@ -146,8 +147,7 @@ sudo dnf install -y tor `# anonymizing network, usefull with VPN` \
                     youtube-dl `# usefull tool for downloading videos from different platforms` \
                     tmux `# Terminal multiplexer` \
                     sox \
-                    dejavu-sans-mono-fonts \
-                    dejavu-serif-fonts  \
+                    dejavu-fonts-all \
                     playerctl `# for controlling audio` \
                     gnome-shell-extension-pop-shell `# make gnome tilling` \
                     # move forward! ->

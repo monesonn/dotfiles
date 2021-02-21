@@ -110,7 +110,7 @@ export LANG=en_US.UTF-8
 # Youtube-dl
 alias yt="youtube-dl"
 alias ytu="youtube-dl -U"
-alias yta="youtube-dl --embed-thumbnail --continue --ignore-errors --no-overwrites --extract-audio --audio-format mp3 --output '$HOME/Music/mp3/%(title)s.%(ext)s'"
+alias yta="youtube-dl --embed-thumbnail --continue --ignore-errors --no-overwrites --extract-audio --audio-format mp3 --output '$HOME/Music/mp3/%(title)s.%(ext)s' --metadata-from-title '(?P<artist>.+?) - (?P<title>.+)'"
 alias yta-i="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/playlists/%(playlist)s/%(title)s.%(ext)s'"
 alias yta-in="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/playlists/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
 alias yta-iu="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/uploaders/%(uploader)s/%(playlist)s/%(title)s.%(ext)s'"
@@ -137,7 +137,8 @@ alias ytv-playlist="youtube-dl --output '$HOME/Videos/%(playlist)s/%(playlist_in
 # Merging audio/video files
 alias merge-a="ffmpeg -f concat -safe 0 -i <(for f in ./*.mp3; do echo \"file '$PWD/$f'\"; done) -c copy output.mp3"
 alias soxa="sox *.mp3" 
-alias sox!='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
+alias soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
+alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 
 # Alias to modified commands
 alias cp="cp -i"
