@@ -78,7 +78,7 @@ plugins=(
 	zsh-autosuggestions 
 	# zsh-completions
 	dnf 
-	command-not-found 
+	# command-not-found 
 	emoji 
 	sudo 
 	# history
@@ -110,26 +110,6 @@ export LANG=en_US.UTF-8
 # Youtube-dl
 alias yt="youtube-dl"
 alias ytu="youtube-dl -U"
-alias yta="youtube-dl --embed-thumbnail --continue --ignore-errors --no-overwrites --extract-audio --audio-format mp3 --output '$HOME/Music/mp3/%(title)s.%(ext)s' --metadata-from-title '(?P<artist>.+?) - (?P<title>.+)'"
-alias yta-i="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/playlists/%(playlist)s/%(title)s.%(ext)s'"
-alias yta-in="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/playlists/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-alias yta-iu="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/uploaders/%(uploader)s/%(playlist)s/%(title)s.%(ext)s'"
-alias yta-iun="youtube-dl --embed-thumbnail --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/uploaders/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-alias yta0="youtube-dl -f 'bestaudio/best' --continue --ignore-errors --no-overwrites --extract-audio --audio-quality 0 --audio-format mp3  --output '$HOME/Music/mp3/%(title)s.%(ext)s'"
-alias yta-0i="youtube-dl -f 'bestaudio/best' -cwv --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/playlists/%(playlist)s/%(title)s.%(ext)s'"
-alias yta-0in="youtube-dl -f 'bestaudio/best' -cwv --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/playlists/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-alias yta-0iu="youtube-dl -f 'bestaudio/best' -cwv --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/uploaders/%(uploader)s/%(playlist)s/%(title)s.%(ext)s'"
-alias yta-0iun="youtube-dl -f 'bestaudio/best' -cwv --ignore-errors --extract-audio --audio-format mp3 --output '$HOME/Music/uploaders/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-alias yta-wo="youtube-dl --embed-thumbnail --continue --ignore-errors --no-overwrites --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s'"
-alias yta-aac="youtube-dl --extract-audio --audio-format aac --output '$HOME/Music/aac/%(title)s.%(ext)s'"
-alias yta-best="youtube-dl --extract-audio --audio-format best --output '$HOME/Music/best/%(title)s.%(ext)s'"
-alias yta-flac="youtube-dl --extract-audio --audio-format flac --output '$HOME/Music/flac/%(title)s.%(ext)s'"
-alias yta-m4a="youtube-dl --extract-audio --audio-format m4a --output '$HOME/Music/m4a/%(title)s.%(ext)s'"
-alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 --output '$HOME/Music/mp3/%(title)s.%(ext)s'"
-alias yta-opus="youtube-dl --extract-audio --audio-format opus --output '$HOME/Music/opus/%(title)s.%(ext)s'"
-alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis --output '$HOME/Music/vorbis/%(title)s.%(ext)s'"
-alias yta-wav="youtube-dl --extract-audio --audio-format wav --output '$HOME/Music/wav/%(title)s.%(ext)s'"
-alias ytv="youtube-dl --format mp4 --output '$HOME/Videos/ytv/%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s'"
 alias ytv-best="youtube-dl -f bestvideo+bestaudio"
 alias ytv-uploader="youtube-dl --output '$HOME/Videos/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
 alias ytv-playlist="youtube-dl --output '$HOME/Videos/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
@@ -213,6 +193,9 @@ alias upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ da
 
 alias p10ku="git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull"
 alias omzu="omz update"
+
+alias hide_cursor="echo -ne '\e[?25l'"
+alias reappear_cursor="echo -ne '\e[?25h'"
 
 ## GIT
 alias addup='git add -u'
@@ -330,3 +313,19 @@ echo "\033[1;34m$(fortune -s)\033[m\n"
 # curl 
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 wttr() { curl wttr.in/$1; }
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/monesonn/.anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/monesonn/.anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/monesonn/.anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/monesonn/.anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
