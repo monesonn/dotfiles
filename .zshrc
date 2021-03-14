@@ -1,8 +1,7 @@
-#  _____    _
-# |__  /___| |__  _ __ ___
-#   / // __| '_ \| '__/ __|
-#  / /_\__ \ | | | | | (__
-# /____|___/_| |_|_|  \___|
+#             __          
+#    ___ ___ / /  ________
+#  _/_ /(_-</ _ \/ __/ __/
+# (_)__/___/_//_/_/  \__/
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -105,7 +104,14 @@ export LANG=en_US.UTF-8
 # export ARCHFLAGS="-arch x86_64"
 
 
-### ALIAS'S ###
+
+#                    
+# ALIASES
+#
+
+
+# Reload .zshrc
+alias refresh="exec zsh"
 
 # Youtube-dl
 alias yt="youtube-dl"
@@ -113,6 +119,7 @@ alias ytu="youtube-dl -U"
 alias ytv-best="youtube-dl -f bestvideo+bestaudio"
 alias ytv-uploader="youtube-dl --output '$HOME/Videos/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
 alias ytv-playlist="youtube-dl --output '$HOME/Videos/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
+
 
 # Merging audio/video files
 alias merge-a="ffmpeg -f concat -safe 0 -i <(for f in ./*.mp3; do echo \"file '$PWD/$f'\"; done) -c copy output.mp3"
@@ -124,7 +131,10 @@ alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -
 alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
+alias du='du -sh'
 alias mkdir="mkdir -p"
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"'
+alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
 
 # Alias chmod commands
 alias ax='chmod a+x'
@@ -134,50 +144,49 @@ alias 666='chmod -R 666'
 alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
+
 # Shortcuts
+
+alias c="clear"
 alias t="touch"
 alias e="exit"
 alias q="exit"
-alias c="clear"
 alias n="nvim"
 alias v="vim"
-alias da='date "+%Y-%m-%d %A %T %Z"'
-alias du='du -sh'
+alias h="help"
+
 alias sn="sudo nvim"
 alias sv="sudo vim"
+alias da='date "+%Y-%m-%d %A %T %Z"'
 alias tl="tail -f"
 alias rn="ranger"
 alias mk="mkdir"
 alias rf="rm -rf"
 alias ff="find . -type f -name"
+alias nf="neofetch"
+
 alias fdir="find . -type d -name"
-alias help="cht.sh"
 alias hgrep="history | grep"
 alias edit="$EDITOR"
 alias hist="history"
-alias refresh="exec zsh"
 
-alias h="help"
-alias nf="neofetch"
 alias lol="lolcat"
 alias upd="sudo dnf update -y"
 alias fupd="flatpak update -y"
 alias pkgs="ls /usr/bin/ | wc -l"
 alias upda="sudo dnf update -y && flatpak update -y"
+
 alias mpvc="mpv --geometry=50%x50%"
 alias mpvsw="mpv --geometry=20%x20% --border=no --ontop=yes"
-alias blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
 
 alias pcnt="sudo protonvpn connect --fastest"
 alias pdcnt="sudo protonvpn disconnect"
+
 alias translate="trans -brief -t uk"
 alias gtt="trans -brief -t ru"
 alias toeng="trans -brief :en"
 alias dict="trans :uk"
 
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"'
-alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
- 
 alias wcp="wl-copy"
 alias wps="wl-paste"
 
@@ -185,19 +194,8 @@ alias fdl="fd -l"
 alias fda="fd -a"
 
 alias netrst="sudo systemctl restart NetworkManager.service"
-alias scripts="ls ~/.local/bin"
 
-alias clck="echo -e `(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')`"
-alias mem="echo -e `(free -h | awk '/^Mem:/ {print $3 "/" $2}')`"
-alias upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ day/d/g' -e 's/ hours/h/g' -e 's/ hour/h/g' -e 's/ minutes/m/g' -e 's/, / /g')`"
-
-alias p10ku="git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull"
-alias omzu="omz update"
-
-alias hide_cursor="echo -ne '\e[?25l'"
-alias reappear_cursor="echo -ne '\e[?25h'"
-
-## GIT
+# git
 alias addup='git add -u'
 alias addall='git add .'
 alias branch='git branch'
@@ -265,7 +263,7 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 # Get error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-# Show current network connections and IPleak
+# Show current network connections
 # alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
 alias ipleak="curl https://ipv4.ipleak.net/json/"
 alias myip="http https://ipv4.ipleak.net/json/ | grep -E '.ip.:|.country_name.:'"
@@ -273,7 +271,21 @@ alias myip="http https://ipv4.ipleak.net/json/ | grep -E '.ip.:|.country_name.:'
 # Switch between shells
 alias tobash="chsh -s $(which bash) && echo 'Now log out.'"
 alias tozsh="chsh -s $(which zsh)  && echo 'Now log out.'"
-# alias tofish="chsh -s $(which fish) && echo 'Now log out.'"
+
+# Usefull aliases
+alias go_update="curl --silent https://storage.googleapis.com/golang/$(curl --silent https://golang.org/doc/devel/release.html | grep -Eo 'go[0-9]+(\.[0-9]+)+' | sort -V | uniq | tail -1).$(uname -s | tr '[:upper:]' '[:lower:]')-$(case "$(uname -m)" in i*) echo '386' ;; x*) echo 'amd64' ;; *) echo 'armv61'; esac).tar.gz  | sudo tar -vxz --strip-components 1 -C $(dirname $(dirname $(which go)))"
+alias omzu="omz update"
+alias hide_cursor="echo -ne '\e[?25l'"
+alias reappear_cursor="echo -ne '\e[?25h'"
+alias p10ku="git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull"
+alias scripts="ls ~/.local/bin"
+alias clck="echo -e `(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')`"
+alias mem="echo -e `(free -h | awk '/^Mem:/ {print $3 "/" $2}')`"
+alias upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ day/d/g' -e 's/ hours/h/g' -e 's/ hour/h/g' -e 's/ minutes/m/g' -e 's/, / /g')`"
+alias blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias help="cht.sh"
+wttr() { curl wttr.in/$1; }
 
 # Functions 
 
@@ -307,13 +319,6 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # PATH to local scripts
 export PATH="${PATH}:${HOME}/.local/bin/"
 
-echo "\033[1;34m$(fortune -s)\033[m\n"
-#echo "$(fortune -s)\n" | lolcat -r -b
-
-# curl 
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
-wttr() { curl wttr.in/$1; }
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/monesonn/.anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -329,3 +334,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+echo "\033[1;34m$(fortune -s)\033[m\n"
+# echo "$(fortune -s)\n" | lolcat -r -b
