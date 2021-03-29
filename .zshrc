@@ -1,4 +1,4 @@
-#             __          
+#             __
 #    ___ ___ / /  ________
 #  _/_ /(_-</ _ \/ __/ __/
 # (_)__/___/_//_/_/  \__/
@@ -71,17 +71,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git 
-	z 
-	zsh-syntax-highlighting 
-	zsh-autosuggestions 
-	# zsh-completions
-	dnf 
-	# command-not-found 
-	emoji 
-	sudo 
-	# history
+	git
+	z
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+	dnf
+	emoji
+	sudo
 	extract
+    ripgrep
+    fd
+    systemd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -104,11 +104,9 @@ export LANG=en_US.UTF-8
 # export ARCHFLAGS="-arch x86_64"
 
 
-
-#                    
+#
 # ALIASES
 #
-
 
 # Reload .zshrc
 alias refresh="exec zsh"
@@ -120,12 +118,15 @@ alias ytv-best="youtube-dl -f bestvideo+bestaudio"
 alias ytv-uploader="youtube-dl --output '$HOME/Videos/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
 alias ytv-playlist="youtube-dl --output '$HOME/Videos/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
 
-
 # Merging audio/video files
 alias merge-a="ffmpeg -f concat -safe 0 -i <(for f in ./*.mp3; do echo \"file '$PWD/$f'\"; done) -c copy output.mp3"
 alias soxa="sox *.mp3" 
 alias soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
+
+
+# Flags
+
 
 # Alias to modified commands
 alias cp="cp -i"
@@ -144,9 +145,7 @@ alias 666='chmod -R 666'
 alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
-
 # Shortcuts
-
 alias c="clear"
 alias t="touch"
 alias e="exit"
@@ -239,7 +238,7 @@ alias .f='cd "$DOTFILES_DIR"'
 alias bd='cd "$OLDPWD"'
 
 # Changing "ls" to "lsd" or "exa"
-alias ls='exa --icons' # icons only in 0.9 version 
+alias ls='exa' # icons only in 0.9 version 
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
@@ -273,7 +272,7 @@ alias tobash="chsh -s $(which bash) && echo 'Now log out.'"
 alias tozsh="chsh -s $(which zsh)  && echo 'Now log out.'"
 
 # Usefull aliases
-alias go_update="curl --silent https://storage.googleapis.com/golang/$(curl --silent https://golang.org/doc/devel/release.html | grep -Eo 'go[0-9]+(\.[0-9]+)+' | sort -V | uniq | tail -1).$(uname -s | tr '[:upper:]' '[:lower:]')-$(case "$(uname -m)" in i*) echo '386' ;; x*) echo 'amd64' ;; *) echo 'armv61'; esac).tar.gz  | sudo tar -vxz --strip-components 1 -C $(dirname $(dirname $(which go)))"
+# alias go_update="curl --silent https://storage.googleapis.com/golang/$(curl --silent https://golang.org/doc/devel/release.html | grep -Eo 'go[0-9]+(\.[0-9]+)+' | sort -V | uniq | tail -1).$(uname -s | tr '[:upper:]' '[:lower:]')-$(case "$(uname -m)" in i*) echo '386' ;; x*) echo 'amd64' ;; *) echo 'armv61'; esac).tar.gz  | sudo tar -vxz --strip-components 1 -C $(dirname $(dirname $(which go)))"
 alias omzu="omz update"
 alias hide_cursor="echo -ne '\e[?25l'"
 alias reappear_cursor="echo -ne '\e[?25h'"
@@ -285,13 +284,14 @@ alias upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ da
 alias blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias help="cht.sh"
-wttr() { curl wttr.in/$1; }
 
-# Functions 
+# Function
 
-# cdl() { cd "$@" && ls; }
-# function cd { builtin cd "$@" && ls; }
-# gt() { trans -brief -t uk "$@"; }
+function beamerpdf() {
+    file=$(readlink -f "$1")
+    base="${file%.*}"
+    pandoc $file -t beamer --pdf-engine=xelatex -o $base.pdf 2>/dev/null
+}
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -319,20 +319,20 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # PATH to local scripts
 export PATH="${PATH}:${HOME}/.local/bin/"
 
+echo "\033[1;34m$(fortune -s)\033[m\n"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/monesonn/.anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/monesonn/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/monesonn/.anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/monesonn/.anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/monesonn/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/monesonn/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/monesonn/.anaconda3/bin:$PATH"
+        export PATH="/home/monesonn/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-echo "\033[1;34m$(fortune -s)\033[m\n"
-# echo "$(fortune -s)\n" | lolcat -r -b
