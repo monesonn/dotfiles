@@ -53,6 +53,7 @@ Plug 'SirVer/ultisnips'
 "Plug 'lervag/vimtex'
 "Plug 'vim-pandoc/vim-pandoc'
 "Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'powerman/vim-plugin-ruscmd'
 call plug#end()
 
 "==========="
