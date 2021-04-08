@@ -14,75 +14,31 @@ export DOTFILES_DIR="$HOME/.dotfiles"
 export VISUAL="$EDITOR"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# autoload -U compinit && compinit
+### "bat" as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+### "vim" as manpager
+# export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+### "nvim" as manpager
+# export MANPAGER="nvim -c 'set ft=man' -"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	z
-	zsh-syntax-highlighting
-	zsh-autosuggestions
-	dnf
-	emoji
-	sudo
-	extract
+    git
+    z
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    dnf
+    emoji
+    sudo
+    # doas
+    extract
     ripgrep
     fd
     systemd
     zsh-nvm
+    emacs
+    zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -105,9 +61,7 @@ export LANG=en_US.UTF-8
 # export ARCHFLAGS="-arch x86_64"
 
 
-#
 # ALIASES
-#
 
 # Reload .zshrc
 alias refresh="exec zsh"
@@ -125,9 +79,7 @@ alias soxa="sox *.mp3"
 alias soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 
-
 # Flags
-
 
 # Alias to modified commands
 alias cp="cp -i"
@@ -137,7 +89,8 @@ alias du='du -sh'
 alias mkdir="mkdir -p"
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"'
 alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
-alias emacs='emacs -nw'
+alias emacs="emacs -nw"
+alias em="emacs -nw"
 
 # Alias chmod commands
 alias ax='chmod a+x'
@@ -321,6 +274,9 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # PATH to local scripts
 export PATH="${PATH}:${HOME}/.local/bin/"
 
+# DoomEmacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
 echo "\033[1;34m$(fortune -s)\033[m\n"
 
 # >>> conda initialize >>>
@@ -337,4 +293,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
