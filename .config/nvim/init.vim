@@ -227,19 +227,19 @@ hi! link VimHiGroup      VimGroup
 
 
 " Set utf8 as standard encoding and en_US as the standard language
-scriptencoding utf-8    
-set encoding=utf-8                                  
+scriptencoding utf-8
+set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
 
 fun! ViewUTF8()
-	set encoding=utf-8                                  
+	set encoding=utf-8
 	set termencoding=big5
 endfun
 
 fun! UTF8()
-	set encoding=utf-8                                  
+	set encoding=utf-8
 	set termencoding=big5
 	set fileencoding=utf-8
 	set fileencodings=ucs-bom,big5,utf-8,latin1
@@ -325,6 +325,8 @@ map tt :tabnext<cr>
 map <leader>pp :setlocal paste!<cr>
 noremap <leader>rc :e $HOME/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+map <leader>dm :del a-zA-Z0-9<cr>
 
 " Use <Leader>Esc to leave terminal mode
 tnoremap <Leader><Esc> <C-\><C-n>
@@ -506,4 +508,3 @@ let g:multi_cursor_quit_key            = '<Esc>'
 let g:AutoPairsShortcutToggle='<,>p'  
 
 "au filetype go inoremap <buffer> . .<C-x><C-o>
-

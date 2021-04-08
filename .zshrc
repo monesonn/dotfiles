@@ -82,6 +82,7 @@ plugins=(
     ripgrep
     fd
     systemd
+    zsh-nvm
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -136,6 +137,7 @@ alias du='du -sh'
 alias mkdir="mkdir -p"
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"'
 alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
+alias emacs='emacs -nw'
 
 # Alias chmod commands
 alias ax='chmod a+x'
