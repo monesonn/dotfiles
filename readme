@@ -7,8 +7,8 @@ This repository contains scripts that autoinstalls and autoconfigures my fresh i
 
 Originally, scripts should be run on Fedora. This repository will be expanded from time to time, so, mb I will add a more GNU/Linux distributions support.
 
-Installation
-------------
+Installation [WIP]
+------------------
 The laziest way is run one of the following:
 
      # for curl
@@ -21,5 +21,13 @@ You could install script locally and then run, for example:
 
      curl -LO git.io/in.sh
      sh in.sh
+     
+Installation [git bare repository]
+----------------------------------
+git clone --bare https://github.com/monesonn/dotfiles $HOME/.dotfiles
+alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+config config --local status.showUntrackedFiles no
+config reset
+config checkout .
 
 That's it.
