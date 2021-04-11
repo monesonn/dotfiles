@@ -10,10 +10,14 @@ export ZSH="$HOME/.oh-my-zsh"
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 export HISTSIZE=1000
 export EDITOR="nvim"
-export DOTFILES_DIR="$HOME/.dotfiles"
 export VISUAL="$EDITOR"
+export DOTFILES_DIR="$HOME/.dotfiles"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 export LANG=en_US.UTF-8
+
+#export EDITOR="emacsclient -t -a ''"
+#export VISUAL="emacsclient -c -a emacs"
+#bindkey -v
 
 # => "bat","vim","nvim" as manpager
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -68,11 +72,16 @@ alias du='du -sh'
 alias mkdir="mkdir -p"
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"'
 alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
-alias emacs="emacs -nw"
-alias em="emacs -nw"
 alias cat='bat'
-#alias cat='bat'
 #alias find='fd'
+alias em="emacs -nw"
+alias emacs="emacsclient -c -a 'emacs'"
+
+# DOOM EMACS
+alias doomsync="~/.emacs.d/bin/doom sync"
+alias doomdoctor="~/.emacs.d/bin/doom doctor"
+alias doomupgrade="~/.emacs.d/bin/doom upgrade"
+alias doompurge="~/.emacs.d/bin/doom purge"
 
 # Alias chmod commands
 alias ax='chmod a+x'
@@ -145,7 +154,14 @@ alias tag='git tag'
 alias newtag='git tag -a'
 alias config="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
 
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
 # Configuration
+alias cfg="$EDITOR $HOME/.config/"
 alias rnrc="$EDITOR $HOME/.config/ranger/rc.conf"
 alias lfrc="$EDITOR $HOME/.config/lf/lfrc"
 alias bashrc="$EDITOR $HOME/.bashrc"
@@ -171,6 +187,7 @@ alias .5='cd ../../../..'
 alias .6='cd ../../../../..'
 alias .f='cd "$DOTFILES_DIR"'
 alias bd='cd "$OLDPWD"'
+alias ohmz='cd "$ZSH"'
 
 # Changing "ls" to "lsd" or "exa"
 alias ls='exa' # icons only in 0.9 version 
