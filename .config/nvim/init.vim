@@ -3,7 +3,7 @@
 "    / / _ \/ / __/| |/ / /  ' \
 "   /_/_//_/_/\__(_)___/_/_/_/_/
 
-" Author: monesonn <git.io/monesonn>
+" Author: Stanislav <git.io/monesonn>
 
 " Sections:
 "	-> General
@@ -23,24 +23,22 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	autocmd VimEnter * PlugInstall
 endif
 
-" Plugins I used
+" => Plugins I used
+
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-" Some usefull stuff
+" {{ Basics }}
 Plug 'itchyny/lightline.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/goyo.vim'
 Plug 'airblade/vim-gitgutter'
-" File browsers
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+" {{ File browsers }}
 Plug 'francoiscabrol/ranger.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/NERDTree'
-" Coding .. Language support, Snippets
+" {{  Language support, Snippets }}
 Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -49,11 +47,12 @@ Plug 'machakann/vim-sandwich'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-
-"Plug 'lervag/vimtex'
-"Plug 'vim-pandoc/vim-pandoc'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'powerman/vim-plugin-ruscmd'
+Plug 'psliwka/vim-smoothie'
+" {{ Junegunn Choi Plugins }}
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 "==========="
@@ -336,9 +335,20 @@ nnoremap <silent><C-z> :NERDTreeToggle<CR>
 nnoremap <silent><leader>z :NERDTreeFind<CR>
 map <C-u> :red<CR>
 map <C-f> :Files<CR>
-map <C-o> :Ranger<CR>
+map <Leader>. :Ranger<CR>
 nnoremap <silent><C-g> :Goyo \| set linebreak<CR>
 " map <C>, :set hlsearch!<CR>
+
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <Leader>Left :vertical resize +3<CR>
+noremap <silent> <Leader>Right :vertical resize -3<CR>
+noremap <silent> <Leader>Up :resize +3<CR>
+noremap <silent> <Leader>Down :resize -3<CR>
+
+" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
 
 " Navigating through split windows
 map <C-h> <C-w>h

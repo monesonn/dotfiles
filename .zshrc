@@ -75,7 +75,7 @@ alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LAS
 alias cat='bat'
 #alias find='fd'
 alias em="emacs -nw"
-alias emacs="emacsclient -c -a 'emacs'"
+#alias emacs="emacsclient -c -a 'emacs'"
 
 # DOOM EMACS
 alias doomsync="~/.emacs.d/bin/doom sync"
@@ -92,6 +92,7 @@ alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
 # Shortcuts
+alias c="clear"
 alias clr="clear"
 alias t="touch"
 alias e="exit"
