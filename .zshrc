@@ -13,15 +13,12 @@ export EDITOR="nvim"
 export DOTFILES_DIR="$HOME/.dotfiles"
 export VISUAL="$EDITOR"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+export LANG=en_US.UTF-8
 
-### "bat" as manpager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-### "vim" as manpager
+# => "bat","vim","nvim" as manpager
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
-
-### "nvim" as manpager
-# export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER="nvim -c 'set ft=man' -"
 
 plugins=(
     git
@@ -31,7 +28,7 @@ plugins=(
     dnf
     emoji
     sudo
-    # doas
+    #doas
     extract
     ripgrep
     fd
@@ -43,25 +40,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-#if [[ -n $SSH_CONNECTION ]]; then
-# export EDITOR='vim'
-#else
-#  export EDITOR='nvim'
-#fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-
-# ALIASES
+# => ALIASES
 
 # Reload .zshrc
 alias refresh="exec zsh"
@@ -91,6 +70,9 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerd
 alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
 alias emacs="emacs -nw"
 alias em="emacs -nw"
+alias cat='bat'
+#alias cat='bat'
+#alias find='fd'
 
 # Alias chmod commands
 alias ax='chmod a+x'
@@ -101,7 +83,7 @@ alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
 # Shortcuts
-alias c="clear"
+alias clr="clear"
 alias t="touch"
 alias e="exit"
 alias q="exit"
@@ -109,8 +91,6 @@ alias n="nvim"
 alias v="vim"
 alias h="help"
 
-alias sn="sudo nvim"
-alias sv="sudo vim"
 alias da='date "+%Y-%m-%d %A %T %Z"'
 alias tl="tail -f"
 alias rn="ranger"
@@ -200,12 +180,6 @@ alias lla='ls -la'
 alias lt='ls --tree'
 alias l.='ls -a | egrep "^\."'
 
-# Changing "cat" to "bat"
-alias cat='bat'
-
-# Changing "find" to "fd"
-# alias find='fd'
-
 # Get top process eating MEM
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
@@ -250,6 +224,13 @@ function beamerpdf() {
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Fixing VTE (Tilix)
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+	source /etc/profile.d/vte.sh
+fi
+
+# => PATH
+
 # Adding RUST to the PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -257,11 +238,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export GOPATH=$HOME/.go
 export GOBIN="$GOPATH/bin"
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-
-# Fixing VTE (Tilix)
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-	source /etc/profile.d/vte.sh
-fi
 
 # Setting NVM 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -277,8 +253,6 @@ export PATH="${PATH}:${HOME}/.local/bin/"
 # DoomEmacs
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
-echo "\033[1;34m$(fortune -s)\033[m\n"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/monesonn/.anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -293,3 +267,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+echo "\033[1;34m$(fortune -s)\033[m\n"
