@@ -6,21 +6,6 @@
 This repository contains scripts that autoinstalls and autoconfigures my fresh installed system.
 
 Originally, scripts should be run on Fedora. This repository will be expanded from time to time, so, mb I will add a more GNU/Linux distributions support.
-
-Installation [WIP]
-------------------
-The laziest way is run one of the following:
-
-     # for curl
-     sh <(curl -fsSL git.io/in.sh)
-
-     # for wget
-     sh <(wget -qO- git.io/in.sh)
-
-You could install script locally and then run, for example:
-
-     curl -LO git.io/in.sh
-     sh in.sh
      
 Installation [git bare repository]
 ----------------------------------
