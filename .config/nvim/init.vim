@@ -208,8 +208,8 @@ hi Type         term=NONE cterm=NONE ctermfg=242  ctermbg=NONE
 hi VertSplit    term=NONE cterm=NONE ctermfg=236  ctermbg=16
 hi Visual       term=NONE cterm=NONE ctermfg=16   ctermbg=101
 hi WarningMsg   term=NONE cterm=NONE ctermfg=103  ctermbg=NONE
-"hi LineNr       term=NONE cterm=NONE ctermbg=234  ctermfg=237
-"hi CursorLineNr term=NONE cterm=NONE ctermbg=237  ctermfg=16
+hi LineNr       term=NONE cterm=NONE ctermbg=NONE ctermfg=237
+hi CursorcineNr term=NONE cterm=NONE ctermbg=237  ctermfg=16
 hi Pmenu        term=NONE cterm=NONE ctermfg=249  ctermbg=16
 hi PmenuSel     term=NONE cterm=NONE ctermfg=238  ctermbg=66
 hi PmenuSbar    term=NONE cterm=NONE ctermfg=238  ctermbg=66
