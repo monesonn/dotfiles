@@ -38,12 +38,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/NERDTree'
-" {{  Language support, Snippets }}
+" {{  Code, language support, Snippets }}
 Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'jiangmiao/auto-pairs'
-Plug 'machakann/vim-sandwich' 
+Plug 'machakann/vim-sandwich'
+Plug 'scrooloose/nerdcommenter'
+Plug 'thinca/vim-quickrun'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -281,13 +283,6 @@ set autoindent      " Auto indentation
 set smartindent     " Smart indentation
 set wrap            " Wrapping lines
 
-"======================="
-"= VISUAL MODE RELATED ="
-"======================="
-
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
 "============="
 "= SHORTCUTS ="
 "============="
@@ -332,9 +327,9 @@ tnoremap <Leader><Esc> <C-\><C-n>
 tnoremap <Leader>jj <C-\><C-n>
 
 nnoremap <silent><C-z> :NERDTreeToggle<CR>
-nnoremap <silent><leader>z :NERDTreeFind<CR>
+nnoremap <silent><C-f> :NERDTreeFind<CR>
+" mmap <C-f> :Files<CR>
 map <C-u> :red<CR>
-map <C-f> :Files<CR>
 map <Leader>. :Ranger<CR>
 nnoremap <silent><C-g> :Goyo \| set linebreak<CR>
 " map <C>, :set hlsearch!<CR>
@@ -349,7 +344,6 @@ noremap <silent> <Leader>Down :resize -3<CR>
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
-
 " Navigating through split windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -360,32 +354,17 @@ map <C-Down> <C-w>j
 map <C-Up> <C-w>k
 map <C-Right> <C-w>l
 
-" Function, that hide UI 
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-nnoremap <leader>h :call ToggleHiddenAll()<CR>
-
 " Run code from Neovim
-autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
-autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd filetype go nnoremap <F5> :w <bar> exec '!go run '.shellescape('%')<CR>
-autocmd filetype rust nnoremap <F5> :w <bar> exec '!rustc '.shellescape('%').' && ./.shellescape('%:r')<CR> 
-autocmd filetype markdown nnoremap <F5> :w <bar> exec '!pandoc .shellescape('%') -t beamer --pdf-engine=xelatex -o '.shellescape('%').pdf' && mupdf '.shellescape('%').pdf'<CR>
+
+" you can use it instead of quickrun
+"autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
+"autocmd filetype c nnoremap <F5> :w <bar> exec '!cc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+"autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+"autocmd filetype go nnoremap <F5> :w <bar> exec '!go run '.shellescape('%')<CR>
+"autocmd filetype rust nnoremap <F5> :w <bar> exec '!rustc '.shellescape('%').' && ./.shellescape('%:r')<CR> 
+"autocmd filetype markdown nnoremap <F5> :w <bar> exec '!pandoc .shellescape('%') -t beamer --pdf-engine=xelatex -o '.shellescape('%').pdf' && mupdf '.shellescape('%').pdf'<CR>
+
+nnoremap <silent> <F5> :QuickRun <CR>
 
 "============="
 "= Functions ="
@@ -407,6 +386,33 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+" Function, that hide UI 
+let s:hidden_all = 1
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <silent><leader>h :call ToggleHiddenAll()<CR>
+
+"======================="
+"= VISUAL MODE RELATED ="
+"======================="
+
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "========================="
 "= PLUGINS CONFIGURATION ="
