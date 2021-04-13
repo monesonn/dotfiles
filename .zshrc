@@ -74,7 +74,7 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerd
 alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
 alias cat='bat'
 #alias find='fd'
-alias em="emacs -nw"
+alias em="\emacs -nw"
 #alias emacs="emacsclient -c -a 'emacs'"
 
 # DOOM EMACS
