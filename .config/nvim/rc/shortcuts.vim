@@ -1,6 +1,5 @@
-"============="
-"= SHORTCUTS ="
-"============="
+" ▄▀▀ █▄█ ▄▀▄ █▀▄ ▀█▀ ▄▀▀ █ █ ▀█▀ ▄▀▀
+" ▄██ █ █ ▀▄▀ █▀▄  █  ▀▄▄ ▀▄█  █  ▄██
 
 nnoremap <silent> ,<leader> :set hlsearch!<CR>
 nmap <silent><leader>/ :nohl<CR>
@@ -41,7 +40,7 @@ map <leader>dm :del a-zA-Z0-9<cr>
 tnoremap <Leader><Esc> <C-\><C-n>
 tnoremap <Leader>jj <C-\><C-n>
 
-nnoremap <silent><C-z> :NERDTreeToggle<CR>
+nnoremap <silent><C-z> :NERDTreeToggle %<CR>
 nnoremap <silent><C-f> :NERDTreeFind<CR>
 " mmap <C-f> :Files<CR>
 map <C-u> :red<CR>

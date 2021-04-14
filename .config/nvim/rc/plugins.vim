@@ -1,3 +1,6 @@
+" █▀▄ █   █ █ ▄▀  █ █▄ █ ▄▀▀
+" █▀  █▄▄ ▀▄█ ▀▄█ █ █ ▀█ ▄██
+
 " Installing plug-in for nvim, if absent and auto-install plugins below
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -5,8 +8,6 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
-
-" => Plugins I used
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 " {{ Basics }}
@@ -21,6 +22,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/NERDTree'
+Plug 'xuyuanp/nerdtree-git-plugin'
 " {{  Code, language support, Snippets }}
 Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
@@ -29,7 +31,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 Plug 'scrooloose/nerdcommenter'
 Plug 'thinca/vim-quickrun'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'powerman/vim-plugin-ruscmd'

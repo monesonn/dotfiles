@@ -1,6 +1,5 @@
-"========================="
-"= PLUGINS CONFIGURATION ="
-"========================="
+" █▀▄ █   █ █ ▄▀  █ █▄ █ ▄▀▀   ▄▀▀ ▄▀▄ █▄ █ █▀
+" █▀  █▄▄ ▀▄█ ▀▄█ █ █ ▀█ ▄██   ▀▄▄ ▀▄▀ █ ▀█ █▀
 
 let g:lightline = {
       \ 'colorscheme': 'nord',
@@ -108,3 +107,10 @@ let g:multi_cursor_quit_key            = '<Esc>'
 let g:AutoPairsShortcutToggle='<,>p'  
 
 "au filetype go inoremap <buffer> . .<C-x><C-o>
+
+let g:coc_global_extensions = [
+            \ 'coc-json',
+            \ 'coc-git',
+            \ 'coc-go',
+            \ 'coc-prettier',
+            \]

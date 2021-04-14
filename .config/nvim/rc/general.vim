@@ -1,3 +1,6 @@
+" ▄▀  ██▀ █▄ █ ██▀ █▀▄ ▄▀▄ █
+" ▀▄█ █▄▄ █ ▀█ █▄▄ █▀▄ █▀█ █▄▄
+
 let mapleader = "\<Space>"  " Sets mapleader
 
 autocmd! bufwritepost init.vim source $HOME/.config/nvim/init.vim " Auto-reload nvim when editing it
