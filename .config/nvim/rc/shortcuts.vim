@@ -82,4 +82,4 @@ noremap B 5b
 "autocmd filetype rust nnoremap <F5> :w <bar> exec '!rustc '.shellescape('%').' && ./.shellescape('%:r')<CR> 
 "autocmd filetype markdown nnoremap <F5> :w <bar> exec '!pandoc .shellescape('%') -t beamer --pdf-engine=xelatex -o '.shellescape('%').pdf' && mupdf '.shellescape('%').pdf'<CR>
 
-nnoremap <silent> <F5> :QuickRun <CR>
+nnoremap <silent> <F5> :silent QuickRun <CR>
