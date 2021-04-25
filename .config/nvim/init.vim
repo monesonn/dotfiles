@@ -19,6 +19,7 @@ let configs = [
 \  "plugins-settings",
 \  "ui",
 \  "shortcuts",
+\  "functions",
 \]
 for file in configs
   let x = expand("~/.config/nvim/rc/".file.".vim")
