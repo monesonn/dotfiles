@@ -63,7 +63,7 @@ alias soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 
 # Find and listen something
-alias listen='mpv --no-video "$(fd -e "mp3" -e "aac" -e "flac" | fzf)"'
+alias listen='mpv --no-video "$(fd ".*.mp3$|.*.flac$|.*.aac$|.*.opus$" | fzf)"'
 
 # Flags
 
@@ -165,7 +165,7 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 # Configuration
-alias cfg='$EDITOR `fd ".*.conf$|.*.vim$|.*.lua$|.*.rc$|.*rc$" --type file -H $HOME/.config -E "plugged" -E "coc" | fzf`'
+alias cfg='$EDITOR `fd ".*.conf$|.*.vim$|.*.lua$|.*.rc$|.*rc$|.*json$" --type file -H $HOME/.config -E "plugged" -E "coc" -E "schemes" | fzf`'
 alias hcfg='$EDITOR `fd "^\." -H --type file --maxdepth 1 | fzf`'
 alias zshrc="$EDITOR $HOME/.zshrc"
 
