@@ -41,8 +41,9 @@ tnoremap <Leader><Esc> <C-\><C-n>
 tnoremap <Leader>jj <C-\><C-n>
 
 nnoremap <silent><C-z> :NERDTreeToggle %<CR>
-nnoremap <silent><C-f> :NERDTreeFind<CR>
-" mmap <C-f> :Files<CR>
+"nnoremap <silent><press C-Z> :NERDTreeFind<CR>
+nnoremap <silent><C-f> :Files<CR>
+"nnoremap <silent><press C-F> :Files ~<CR>
 map <C-u> :red<CR>
 map <Leader>. :Ranger<CR>
 nnoremap <silent><C-g> :Goyo \| set linebreak<CR>
