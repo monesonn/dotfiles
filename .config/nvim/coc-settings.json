@@ -1,11 +1,10 @@
 {
   "suggest.noselect": false,
   "diagnostic.errorSign": "✘",
-  "diagnostic.warningSign": "!",
+  "diagnostic.warningSign": "W",
   "diagnostic.infoSign": "?",
   "diagnostic.enableHighlightLineNumber": true,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.hintSign": "",
   "coc.preferences.formatOnSaveFiletypes": ["javascript", "go"],
   "coc.preferences.hoverTarget": "float",
   "languageserver": {
