@@ -62,6 +62,9 @@ alias soxa="sox *.mp3"
 alias soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 
+# Find and listen something
+alias listen='mpv --no-video "$(fd -e "mp3" -e "aac" -e "flac" | fzf)"'
+
 # Flags
 
 # Alias to modified commands
@@ -162,22 +165,9 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 # Configuration
-alias cfg="$EDITOR $HOME/.config/"
-alias rnrc="$EDITOR $HOME/.config/ranger/rc.conf"
-alias lfrc="$EDITOR $HOME/.config/lf/lfrc"
-alias bashrc="$EDITOR $HOME/.bashrc"
+alias cfg='$EDITOR `fd ".*.conf$|.*.vim$|.*.lua$|.*.rc$|.*rc$" --type file -H $HOME/.config -E "plugged" -E "coc" | fzf`'
+alias hcfg='$EDITOR `fd "^\." -H --type file --maxdepth 1 | fzf`'
 alias zshrc="$EDITOR $HOME/.zshrc"
-alias vimrc="$EDITOR $HOME/.vimrc"
-alias nvimrc="$EDITOR $HOME/.config/nvim/init.vim"
-alias ohmyzsh="$EDITOR $HOME/.oh-my-zsh"
-alias nfrc="$EDITOR $HOME/.config/neofetch/config.conf"
-alias p10krc="$EDITOR $HOME/.p10k.zsh"
-alias swayrc="$EDITOR $HOME/.config/sway/config"
-alias swaydrc="$EDITOR $HOME/.config/sway/decoration"
-alias alacrittyrc="$EDITOR $HOME/.config/alacritty/alacritty.yml"
-alias waybarrc="$EDITOR $HOME/.config/waybar/config"
-alias waybarcssrc="$EDITOR $HOME/.config/waybar/style.css"
-alias cmusrc="$EDITOR $HOME/.config/cmus/rc"
 
 # Navigation
 alias ..='cd ..' 
@@ -189,6 +179,7 @@ alias .6='cd ../../../../..'
 alias .f='cd "$DOTFILES_DIR"'
 alias bd='cd "$OLDPWD"'
 alias ohmz='cd "$ZSH"'
+alias j='cd `fd --type directory --full-path $HOME | fzf`'
 
 # Changing "ls" to "lsd" or "exa"
 alias ls='exa' # icons only in 0.9 version 
