@@ -78,7 +78,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " => GitGutter <=
 
-let g:gitgutter_enabled=0
+let g:gitgutter_enabled=1
 
 " => Vim-multiple-cursor <=
 
@@ -105,13 +105,32 @@ let g:coc_global_extensions = [
             \ 'coc-prettier',
             \]
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
 " DISABLE SIGNCOLUMN IN COC.NVIM
-autocmd BufRead,BufNewFile * setlocal signcolumn=no
-autocmd BufRead,BufNewFile * highlight clear SignColumn
+"autocmd BufRead,BufNewFile * setlocal signcolumn=no
+"autocmd BufRead,BufNewFile * highlight clear SignColumn
+
+call wilder#enable_cmdline_enter()
+set wildcharm=<Tab>
+cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
+cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
+
+" only / and ? are enabled by default
+call wilder#set_option('modes', ['/', '?', ':'])
+
+call wilder#set_option('pipeline', [
+      \   wilder#branch(
+      \     [
+      \       wilder#check({_, x -> empty(x)}),
+      \       wilder#history(),
+      \       wilder#result({
+      \         'draw': [{_, x -> ' ' . x}],
+      \       }),
+      \     ],
+      \     wilder#cmdline_pipeline(),
+      \     wilder#search_pipeline(),
+      \   ),
+      \ ])
+
+let g:fzf_preview_window = ['up:50%:hidden', 'ctrl-/']
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler

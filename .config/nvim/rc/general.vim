@@ -4,12 +4,15 @@
 let mapleader = "\<Space>"  " Sets mapleader
 
 autocmd! bufwritepost init.vim source $HOME/.config/nvim/init.vim " Auto-reload nvim when editing it
+autocmd! bufwritepost ./rc/* source $HOME/.config/nvim/init.vim
 
-set history=50  " Sets how many lines of history VIM has to remember
-syntax enable   " Enabling syntax in .* files
-set confirm     " Confirmation of saving changes to the file on exit
+set history=50      " Sets how many lines of history VIM has to remember
+syntax enable       " Enabling syntax in .* files
+set confirm         " Confirmation of saving changes to the file on exit
+set signcolumn=no   " Disable signcolumn by default, it's toggled by function CallSignColumn()
+set autochdir       " Change $PWD from currently opened file. Used for fzf.
 
-filetype on     " Enable filetype detection
+filetype on         " Enable filetype detection
 filetype plugin on  " Enable filetype-specific indenting 
 filetype indent on  " Enable filetype-specific plugins
 

@@ -11,7 +11,7 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 " {{ Basics }}
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
@@ -35,6 +35,8 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'powerman/vim-plugin-ruscmd'
 Plug 'psliwka/vim-smoothie'
+" :UpdateRemotePlugins needed
+Plug 'gelguy/wilder.nvim'
 " {{ Junegunn Choi Plugins }}
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'

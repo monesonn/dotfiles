@@ -36,7 +36,30 @@ function! ToggleHiddenAll()
     endif
 endfunction
 
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+function! ToggleSignColumn()
+    if !exists("b:signcolumn_on") || b:signcolumn_on
+        set signcolumn=no
+        let b:signcolumn_on=0
+    else
+        set signcolumn=yes
+        let b:signcolumn_on=1
+    endif
+endfunction
+
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+endif
+
 nnoremap <silent><leader>h :call ToggleHiddenAll()<CR>
+nnoremap <silent><Leader>s :call ToggleSignColumn()<CR>
 
 "======================="
 "= VISUAL MODE RELATED ="

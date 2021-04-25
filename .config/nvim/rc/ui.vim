@@ -21,7 +21,7 @@ set title       " Title
 set nocompatible
 set noshowmode
 set noshowcmd
-set noruler 
+set noruler
 
 set modelines=0
 set scrolloff=1
@@ -30,7 +30,7 @@ set completeopt-=preview
 
 set wildmenu         " Turn on Wild menu
 set wildignorecase
-set wildmode=longest,list,full
+set wildmode=longest:full,full
 set wildignore=*.o,*~,*.pyc
 set wildignore+=.git,.hg,.svn
 set wildignore+=*.aux,*.out,*.toc
@@ -50,7 +50,13 @@ else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-" set updatetime=300
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+" set shortmess+=c
+
 set cmdheight=1     " Height of the command bar
 set hid             " A buffer becomes hidden when it is abandoned
 
@@ -77,11 +83,68 @@ set tm=500
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Set utf8 as standard encoding and en_US as the standard language
+scriptencoding utf-8
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
+
+fun! ViewUTF8()
+	set encoding=utf-8
+	set termencoding=big5
+endfun
+
+fun! UTF8()
+	set encoding=utf-8
+	set termencoding=big5
+	set fileencoding=utf-8
+	set fileencodings=ucs-bom,big5,utf-8,latin1
+endfun
+
+fun! Big5()
+	set encoding=big5
+	set fileencoding=big5
+endfun
+
+"==========================="
+"= FILES, BACKUPS AND UNDO ="
+"==========================="
+
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"================================"
+"= TEXT, TAB AND INDENT RELATED ="
+"================================"
+
+set expandtab       " Expand TABs to spaces
+set smarttab        " Insert tabs on the start of a line according to context
+
+set shiftwidth=4    " Indents will have a width of 4
+set softtabstop=4   " sets the number of columns for a TAB
+set tabstop=4       " the width of a TAB is set to 4.
+                    " still it is a \t. It is just that
+                    " Vim will interpret it to be having
+                    " a width of 4.
+
+set bs=indent,eol,start
+
+set lbr
+set tw=500
+
+set autoindent      " Auto indentation
+set smartindent     " Smart indentation
+set wrap            " Wrapping lines
+
+
 "===================="
 "= COLORS AND FONTS ="
 "===================="
 
-set background=dark     " Set background 
+set background=dark     " Set background
 set ffs=unix,dos,mac    " Use Unix as the standard file type
 
 hi ColorColumn  term=NONE cterm=NONE ctermfg=NONE ctermbg=242
@@ -136,59 +199,4 @@ hi! link TabLine         StatusLineNC
 hi! link TabLineFill     StatusLineNC
 hi! link VimHiGroup      VimGroup
 
-
-" Set utf8 as standard encoding and en_US as the standard language
-scriptencoding utf-8
-set encoding=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
-
-fun! ViewUTF8()
-	set encoding=utf-8
-	set termencoding=big5
-endfun
-
-fun! UTF8()
-	set encoding=utf-8
-	set termencoding=big5
-	set fileencoding=utf-8
-	set fileencodings=ucs-bom,big5,utf-8,latin1
-endfun
-
-fun! Big5()
-	set encoding=big5
-	set fileencoding=big5
-endfun
-
-"==========================="
-"= FILES, BACKUPS AND UNDO ="
-"==========================="
-
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
-set nobackup
-set nowb
-set noswapfile
-
-"================================"
-"= TEXT, TAB AND INDENT RELATED ="
-"================================"
-
-set expandtab       " Expand TABs to spaces
-set smarttab        " Insert tabs on the start of a line according to context   
-
-set shiftwidth=4    " Indents will have a width of 4
-set softtabstop=4   " sets the number of columns for a TAB
-set tabstop=4       " the width of a TAB is set to 4.
-                    " still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 4.
-
-set bs=indent,eol,start
-
-set lbr
-set tw=500
-
-set autoindent      " Auto indentation
-set smartindent     " Smart indentation
-set wrap            " Wrapping lines
+hi! link SignColumn      LineNr
