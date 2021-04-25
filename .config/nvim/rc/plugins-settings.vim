@@ -17,23 +17,6 @@ let g:lightline = {
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-" => Ale <=
-
-let g:ale_linters = {
-  \ 'go': ['gopls'],
-  \}
-let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
-
-" Disabling highlighting
-let g:ale_set_highlights = 0
-
-" Only run linting when saving the file
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-
-set omnifunc=ale#completion#OmniFunc
-
 " => NerdTree <=
 
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -54,6 +37,13 @@ let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 
 " => Golang <=
+
+let g:go_diagnostics_enable = 0
+let g:go_metalinter_enabled = []
+let g:go_jump_to_error = 0
+let g:go_fmt_command = "goimports"
+
+let g:go_auto_sameids = 0
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
@@ -115,31 +105,13 @@ let g:coc_global_extensions = [
             \ 'coc-prettier',
             \]
 
-" disable all linters as that is taken care of by coc.nvim
-let g:go_diagnostics_enable = 0
-let g:go_metalinter_enabled = []
-
-" don't jump to errors after metalinter is invoked
-let g:go_jump_to_error = 0
-
-" run go imports on file save
-let g:go_fmt_command = "goimports"
-
-" automatically highlight variable your cursor is on
-let g:go_auto_sameids = 0
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
+
+" DISABLE SIGNCOLUMN IN COC.NVIM
+autocmd BufRead,BufNewFile * setlocal signcolumn=no
+autocmd BufRead,BufNewFile * highlight clear SignColumn

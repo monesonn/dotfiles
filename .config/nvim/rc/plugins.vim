@@ -24,7 +24,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/NERDTree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 " {{  Code, language support, Snippets }}
-Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'jiangmiao/auto-pairs'

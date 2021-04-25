@@ -3,16 +3,10 @@
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "?",
-  "diagnostic.enableSign": false,
+  "diagnostic.enableHighlightLineNumber": true,
   "diagnostic.checkCurrentLine": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "html",
-    "json",
-    "css",
-    "scss",
-    "go"
-  ],
+  "diagnostic.hintSign": "",
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "go"],
   "coc.preferences.hoverTarget": "float",
   "languageserver": {
     "golang": {
