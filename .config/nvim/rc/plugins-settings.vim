@@ -72,8 +72,8 @@ let g:go_highlight_string_spellcheck=0
 " => UltiSnips <=
 
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 " => GitGutter <=
@@ -103,7 +103,13 @@ let g:coc_global_extensions = [
             \ 'coc-git',
             \ 'coc-go',
             \ 'coc-prettier',
+            \ 'coc-snippets',
+            \ 'coc-sql',
+            \ 'coc-pairs',
             \]
+
+" Setup prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " DISABLE SIGNCOLUMN IN COC.NVIM
 "autocmd BufRead,BufNewFile * setlocal signcolumn=no
@@ -131,6 +137,7 @@ call wilder#set_option('pipeline', [
       \   ),
       \ ])
 
-let g:fzf_preview_window = ['up:50%:hidden', 'ctrl-/']
+let g:fzf_layout = { 'down': '30%' }
+let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler

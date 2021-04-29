@@ -26,7 +26,7 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 " {{  Code, language support, Snippets }}
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 Plug 'scrooloose/nerdcommenter'
 Plug 'thinca/vim-quickrun'
