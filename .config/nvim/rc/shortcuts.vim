@@ -54,10 +54,9 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 tnoremap <leader><Esc> <C-\><C-n>
 tnoremap <leader>jj <C-\><C-n>
 
-nnoremap <silent><C-z> :NERDTreeToggle %<CR>
-"nnoremap <silent><press C-Z> :NERDTreeFind<CR>
+"nnoremap <silent><C-z> :NERDTreeToggle %<CR>
+nnoremap <silent><C-z> :FZFExplore<CR>
 nnoremap <silent><C-f> :Files<CR>
-"nnoremap <silent><press C-F> :Files ~<CR>
 
 map <Leader>. :Ranger<CR>
 " nnoremap <silent><C-g> :Goyo \| set linebreak<CR>
@@ -80,6 +79,10 @@ map <C-Down> <C-w>j
 map <C-Up> <C-w>k
 map <C-Right> <C-w>l
 
+" Splitting windows
+map <leader>v <C-w>v
+map <leader>h <C-w>s
+
 " Run code from Neovim
 
 " you can use it instead of quickrun
@@ -96,10 +99,12 @@ map <C>. :cnext<CR>
 map <C>/ :cprevious<CR>
 nnoremap <C-a> :cclose<CR>
 
+nnoremap <silent><C-r> :Rg<CR>
 nnoremap <silent><C-g> :GFiles<CR>
 nnoremap <silent><C-h> :History<CR>
 nnoremap <silent><C-j> :GFiles?<CR>
 nnoremap <silent><C-k> :Buffers<CR>
 nnoremap <silent><C-l> :Lines<CR>
+nnoremap <silent><C-n> :Snippets<CR>
 nnoremap <silent><C-m> :Marks<CR>
 nnoremap <silent><C-c> :Commits<CR>
