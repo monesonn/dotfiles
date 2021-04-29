@@ -10,7 +10,7 @@ set listchars+=precedes:«
 set listchars+=nbsp:░
 
 " split style
-set fillchars=vert:▒
+set fillchars+=vert:\ 
 
 set so=7        " Set 7 lines to the cursor - when moving vertically using j/k
 let $LANG='en'  " Set English as default language
@@ -171,13 +171,13 @@ hi Search       term=NONE cterm=NONE ctermfg=251  ctermbg=247
 hi Special      term=NONE cterm=NONE ctermfg=66   ctermbg=NONE
 hi SpecialKey   term=NONE cterm=NONE ctermfg=101  ctermbg=NONE
 hi Statement    term=NONE cterm=NONE ctermfg=251  ctermbg=NONE
-hi StatusLine   term=NONE cterm=NONE ctermfg=238  ctermbg=NONE
-hi StatusLineNC term=NONE cterm=NONE ctermfg=236  ctermbg=NONE
+hi StatusLine   term=NONE cterm=NONE ctermfg=248  ctermbg=NONE
+hi StatusLineNC term=NONE cterm=NONE ctermfg=246  ctermbg=NONE
 hi String       term=NONE cterm=NONE ctermfg=66   ctermbg=NONE
 hi TabLineSel   term=NONE cterm=NONE ctermfg=251  ctermbg=NONE
 hi Todo         term=NONE cterm=NONE ctermfg=251  ctermbg=66
 hi Type         term=NONE cterm=NONE ctermfg=242  ctermbg=NONE
-hi VertSplit    term=NONE cterm=NONE ctermfg=236  ctermbg=16
+hi VertSplit    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 hi Visual       term=NONE cterm=NONE ctermfg=16   ctermbg=101
 hi WarningMsg   term=NONE cterm=NONE ctermfg=103  ctermbg=NONE
 hi LineNr       term=NONE cterm=NONE ctermbg=NONE ctermfg=238
