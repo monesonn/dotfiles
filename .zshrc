@@ -180,7 +180,7 @@ alias .f='cd "$DOTFILES_DIR"'
 alias bd='cd "$OLDPWD"'
 alias ohmz='cd "$ZSH"'
 alias j='cd `fd "" -H --type directory $HOME | fzf`'
-alias z='z | fzf'
+alias zz='z `z | fzf`'
 
 # Changing "ls" to "lsd" or "exa"
 alias ls='exa' # icons only in 0.9 version 
@@ -230,6 +230,10 @@ function beamerpdf() {
     file=$(readlink -f "$1")
     base="${file%.*}"
     pandoc $file -t beamer --pdf-engine=xelatex -o $base.pdf 2>/dev/null
+}
+
+geo () {
+    [ ${#} -eq 0 ] && http --body ipv4.ipleak.net/json/ || http --body ipv4.ipleak.net/json/`dig +short $1`
 }
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
