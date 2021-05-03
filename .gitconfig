@@ -1,0 +1,43 @@
+[user]
+	email = monesonn@tuta.io
+	name = monesonn
+[init]
+	defaultBranch = main
+[alias]
+    graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%C(blue)%x20(%ce)%x20%C(cyan)%C(reset)%n%x20%s%n"
+	stat = status -sb
+	last = log -1 --stat
+	unstage = reset HEAD --
+	cached = diff --cached
+	d = difftool
+	c = clone
+[color]
+	ui = true
+[core]
+	editor = nvim
+[gpg]
+    program = gpg
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    syntax-theme = Dracula
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
