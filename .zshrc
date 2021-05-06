@@ -179,7 +179,8 @@ alias .6='cd ../../../../..'
 alias .f='cd "$DOTFILES_DIR"'
 alias bd='cd "$OLDPWD"'
 alias ohmz='cd "$ZSH"'
-alias j='cd `fd "" -H --type directory $HOME | fzf`'
+alias j='cd `fd --type directory | fzf`'
+alias jj='cd `fd "" -H --type directory $HOME | fzf`'
 alias zz='z `z | fzf`'
 
 # Changing "ls" to "lsd" or "exa"
