@@ -68,12 +68,27 @@ function! ToggleSignColumn()
     endif
 endfunction
 
+function! OnChangeSvelteSubtype(subtype)
+  echom 'Subtype is '.a:subtype
+  if empty(a:subtype) || a:subtype == 'html'
+    setlocal commentstring=<!--%s-->
+    setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+  elseif a:subtype =~ 'css'
+    setlocal comments=s1:/*,mb:*,ex:*/ commentstring&
+  else
+    setlocal commentstring=//%s
+    setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  endif
+endfunction
+
+autocmd FileType svelte inoremap <buffer><expr> OnChangeSvelteSubtype()
+
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
 nnoremap <silent><leader>0 :call ToggleHiddenAll()<CR>
-nnoremap <silent><Leader>s :call ToggleSignColumn()<CR>
+nnoremap <silent><leader>s :call ToggleSignColumn()<CR>
 
 "======================="
 "= VISUAL MODE RELATED ="
