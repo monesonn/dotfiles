@@ -12,7 +12,6 @@ endif
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 " {{ Basics }}
 "Plug 'itchyny/lightline.vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
@@ -23,18 +22,23 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/NERDTree'
 Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" {{  Themes }}
+Plug 'yuttie/hydrangea-vim'
+Plug 'romgrk/doom-one.vim'
 " {{  Code, language support, Snippets }}
+Plug 'editorconfig/editorconfig-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'jiangmiao/auto-pairs'
+Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'sheerun/vim-polyglot'
 Plug 'machakann/vim-sandwich'
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'thinca/vim-quickrun'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'powerman/vim-plugin-ruscmd'
-Plug 'psliwka/vim-smoothie'
 " :UpdateRemotePlugins needed
 Plug 'gelguy/wilder.nvim'
 " {{ Junegunn Choi Plugins }}
