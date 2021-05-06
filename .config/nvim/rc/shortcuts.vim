@@ -54,7 +54,7 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 tnoremap <leader><Esc> <C-\><C-n>
 tnoremap <leader>jj <C-\><C-n>
 
-"nnoremap <silent><C-z> :NERDTreeToggle %<CR>
+nnoremap <silent><C-n> :NERDTreeToggle %<CR>
 nnoremap <silent><C-z> :FZFExplore<CR>
 nnoremap <silent><C-f> :Files<CR>
 
@@ -105,6 +105,21 @@ nnoremap <silent><C-h> :History<CR>
 nnoremap <silent><C-j> :GFiles?<CR>
 nnoremap <silent><C-k> :Buffers<CR>
 nnoremap <silent><C-l> :Lines<CR>
-nnoremap <silent><C-n> :Snippets<CR>
-nnoremap <silent><C-m> :Marks<CR>
-nnoremap <silent><C-c> :Commits<CR>
+nnoremap <silent><C-s> :Snippets<CR>
+" nnoremap <silent><C-m> :Marks<CR>
+" nnoremap <silent><C-n> :Commits<CR>
+nnoremap <silent><C-m> :Commands<CR>
+
+nmap <silent><C-c> <Plug>(coc-cursors-position)
+nmap <leader>x <Plug>(coc-cursors-operator)
+
+nmap <silent><C-d> <Plug>(coc-cursors-word)*
+xmap <silent><C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)
+
+nmap <expr><silent><C-d> <SID>select_current_word()
+function! s:select_current_word()
+  if !get(b:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc

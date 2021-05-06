@@ -24,10 +24,11 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize=50
 let NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeAutoDeleteBuffer = 1
+" let NERDTreeQuitOnOpen = 1
+
 " autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
 
 " => Goyo <=
@@ -80,22 +81,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 let g:gitgutter_enabled=1
 
-" => Vim-multiple-cursor <=
-
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-s>'
-let g:multi_cursor_select_all_word_key = '<A-s>'
-let g:multi_cursor_start_key           = 'g<C-s>'
-let g:multi_cursor_select_all_key      = 'g<A-s>'
-let g:multi_cursor_next_key            = '<C-s>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-let g:AutoPairsShortcutToggle='<,>p'  
-
 "au filetype go inoremap <buffer> . .<C-x><C-o>
 
 let g:coc_global_extensions = [
@@ -103,6 +88,7 @@ let g:coc_global_extensions = [
             \ 'coc-git',
             \ 'coc-go',
             \ 'coc-prettier',
+            \ 'coc-svelte',
             \ 'coc-snippets',
             \ 'coc-sql',
             \ 'coc-pairs',
@@ -136,6 +122,24 @@ call wilder#set_option('pipeline', [
       \     wilder#search_pipeline(),
       \   ),
       \ ])
+
+"au! BufNewFile,BufRead *.svelte set ft=html
+let g:vim_svelte_plugin_load_full_syntax = 1
+
+function! OnChangeSvelteSubtype(subtype)
+  echom 'Subtype is '.a:subtype
+  if empty(a:subtype) || a:subtype == 'html'
+    setlocal commentstring=<!--%s-->
+    setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+  elseif a:subtype =~ 'css'
+    setlocal comments=s1:/*,mb:*,ex:*/ commentstring&
+  else
+    setlocal commentstring=//%s
+    setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  endif
+endfunction
+
+autocmd FileType svelte inoremap <buffer><expr> OnChangeSvelteSubtype()
 
 let g:fzf_layout = { 'down': '30%' }
 let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
