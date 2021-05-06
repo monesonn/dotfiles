@@ -3,8 +3,17 @@
 
 let mapleader = "\<Space>"  " Sets mapleader
 
+" Autoreloading config files
 autocmd! bufwritepost init.vim source $HOME/.config/nvim/init.vim " Auto-reload nvim when editing it
-autocmd! bufwritepost ./rc/* source $HOME/.config/nvim/init.vim
+autocmd! bufwritepost general.vim source $HOME/.config/nvim/init.vim
+autocmd! bufwritepost functions.vim source $HOME/.config/nvim/init.vim
+autocmd! bufwritepost plugins.vim source $HOME/.config/nvim/init.vim
+autocmd! bufwritepost plugins-settings.vim source $HOME/.config/nvim/init.vim
+autocmd! bufwritepost shortcuts.vim source $HOME/.config/nvim/init.vim
+autocmd! bufwritepost ui.vim source $HOME/.config/nvim/init.vim
+
+" Shortcut for reloading init.vim
+nnoremap <silent><leader>u :source $HOME/.config/nvim/init.vim<CR>
 
 set history=50      " Sets how many lines of history VIM has to remember
 syntax enable       " Enabling syntax in .* files
