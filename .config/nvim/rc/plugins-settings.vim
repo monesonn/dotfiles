@@ -39,19 +39,26 @@ let g:goyo_margin_bottom = 2
 
 " => Golang <=
 
-let g:go_diagnostics_enable = 0
-let g:go_metalinter_enabled = []
-let g:go_jump_to_error = 0
-let g:go_fmt_command = "goimports"
-
-let g:go_auto_sameids = 0
+" General
+let g:go_gopls_enabled = 1
+let g:go_gopls_options = ['-remote=auto']
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_referrers_mode = 'gopls'
 
-let g:go_auto_type_info = 1
+let g:go_diagnostics_enable = 1
+
+" Auto formatting and importing, silent fail
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-let g:go_list_type = 'quickfix'
+
+" Status line types
+let g:go_auto_sameids = 0
+let g:go_auto_type_info = 1
+
+" Go syntax highlighting
 let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_function_calls = 1
@@ -59,23 +66,19 @@ let g:go_highlight_fields = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_highlight_function_parameters = 1
-let g:go_addtags_transform = 'camelcase'
-let g:go_highlight_functions = 1
-let g:go_highlight_types = 1
-let g:go_fmt_command = 'goimports'
-let g:go_jump_to_error = 1
-let g:go_loaded_gosnippets = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_build_constraints = 1
-" let g:go_loaded_install = 1
 let g:go_highlight_string_spellcheck=0
+let g:go_highlight_functions = 1
+let g:go_highlight_types = 1
 
-" => UltiSnips <=
+let g:go_metalinter_enabled = []
+let g:go_jump_to_error = 0
 
-let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+let g:go_list_type = 'quickfix'
+
+let g:go_loaded_gosnippets = 1
+let g:go_loaded_install = 0
 
 " => GitGutter <=
 
@@ -86,7 +89,6 @@ let g:gitgutter_enabled=1
 let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-git',
-            \ 'coc-go',
             \ 'coc-prettier',
             \ 'coc-svelte',
             \ 'coc-snippets',
@@ -145,3 +147,17 @@ let g:fzf_layout = { 'down': '30%' }
 let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'

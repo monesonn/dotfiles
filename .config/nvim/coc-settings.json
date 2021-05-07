@@ -5,12 +5,25 @@
   "diagnostic.infoSign": "?",
   "diagnostic.enableHighlightLineNumber": true,
   "diagnostic.checkCurrentLine": true,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "go", "html", "css", "svelte"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "json",
+    "go",
+    "html",
+    "css",
+    "svelte"
+  ],
   "languageserver": {
     "golang": {
       "command": "gopls",
+      "args": ["-remote=auto"],
       "rootPatterns": ["go.mod"],
       "filetypes": ["go"]
+    },
+    "clangd": {
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
     }
   },
   "go.goplsOptions": {

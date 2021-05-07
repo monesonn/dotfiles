@@ -11,7 +11,6 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 " {{ Basics }}
-"Plug 'itchyny/lightline.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
@@ -25,11 +24,9 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " {{  Themes }}
 Plug 'yuttie/hydrangea-vim'
-Plug 'romgrk/doom-one.vim'
 " {{  Code, language support, Snippets }}
-Plug 'editorconfig/editorconfig-vim'
-Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'editorconfig/editorconfig-vim'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'sheerun/vim-polyglot'
 Plug 'machakann/vim-sandwich'
