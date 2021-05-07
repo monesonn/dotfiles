@@ -78,7 +78,6 @@ let g:go_jump_to_error = 0
 let g:go_list_type = 'quickfix'
 
 let g:go_loaded_gosnippets = 1
-let g:go_loaded_install = 0
 
 " => GitGutter <=
 
