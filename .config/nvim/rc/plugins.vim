@@ -9,6 +9,11 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	autocmd VimEnter * PlugInstall
 endif
 
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 " {{ Basics }}
 Plug 'vimwiki/vimwiki'
@@ -32,10 +37,11 @@ Plug 'sheerun/vim-polyglot'
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
 Plug 'thinca/vim-quickrun'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'powerman/vim-plugin-ruscmd'
+Plug 'ap/vim-css-color'
 " :UpdateRemotePlugins needed
 Plug 'gelguy/wilder.nvim'
 " {{ Junegunn Choi Plugins }}
