@@ -1,0 +1,31 @@
+background_opacity: 0.90
+live_config_reload: true
+startup_mode: Fullscreen
+decorations: none
+
+colors:
+  primary:
+    background: '0x000000'
+    foreground: '0xeaeaea'
+
+font:
+    normal:
+        family: GohuFont Nerd Font Mono
+        size: Regular
+    bold:
+        family: GohuFont Nerd Font Mono
+        size: Regular
+    size: 14.0
+
+bell:
+  animation: EaseOutExpo
+  color: '0xffffff'
+  duration: 0
+
+window:
+    padding:
+        x: 6
+        y: 6
+
+mouse:
+    hide_when_typing: true
