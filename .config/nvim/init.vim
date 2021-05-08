@@ -21,6 +21,7 @@ let configs = [
 \  "shortcuts",
 \  "functions",
 \]
+
 for file in configs
   let x = expand("~/.config/nvim/rc/".file.".vim")
   if filereadable(x)
