@@ -212,7 +212,7 @@ alias tobash="chsh -s $(which bash) && echo 'Now log out.'"
 alias tozsh="chsh -s $(which zsh)  && echo 'Now log out.'"
 
 # Usefull aliases
-# alias go_update="curl --silent https://storage.googleapis.com/golang/$(curl --silent https://golang.org/doc/devel/release.html | grep -Eo 'go[0-9]+(\.[0-9]+)+' | sort -V | uniq | tail -1).$(uname -s | tr '[:upper:]' '[:lower:]')-$(case "$(uname -m)" in i*) echo '386' ;; x*) echo 'amd64' ;; *) echo 'armv61'; esac).tar.gz  | sudo tar -vxz --strip-components 1 -C $(dirname $(dirname $(which go)))"
+
 alias omzu="omz update"
 alias hide_cursor="echo -ne '\e[?25l'"
 alias reappear_cursor="echo -ne '\e[?25h'"
@@ -235,6 +235,16 @@ function beamerpdf() {
 
 geo () {
     [ ${#} -eq 0 ] && http --body ipv4.ipleak.net/json/ || http --body ipv4.ipleak.net/json/`dig +short $1`
+}
+
+go_update () {
+    release=$(curl --silent https://golang.org/doc/devel/release.html | grep -Eo 'go[0-9]+(\.[0-9]+)+' | sort -V | uniq | tail -1)
+    os=$(uname -s | tr '[:upper:]' '[:lower:]')
+    arch=$(case "$(uname -m)" in i*) echo '386' ;; x*) echo 'amd64' ;; *) echo 'armv61'; esac)
+
+    curl --silent https://storage.googleapis.com/golang/$release.$os-$arch.tar.gz | sudo tar -vxz --strip-components 1 -C /usr/local/go
+    exec zsh
+    echo "updated to $(go version)"
 }
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
