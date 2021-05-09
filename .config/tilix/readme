@@ -1,0 +1,15 @@
+MIGRATING SETTINGS
+
+This directory contains color schemes for Tilix (installed by Gogh, link: https://mayccoll.github.io/Gogh/).
+Schemes will automatically imported and there's no additional things to do.
+
+Also I dumped file of my Tilix configuration.
+Optional, use instructions below to load it.
+
+* Export settings from Tilix using dconf utility
+
+$ dconf dump /com/gexperts/Tilix/ > tilix.dconf
+
+* Import dump file to apply configuration settings
+
+$ dconf load /com/gexperts/Tilix/ < tilix.dconf
