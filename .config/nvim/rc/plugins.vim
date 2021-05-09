@@ -1,5 +1,9 @@
-" █▀▄ █   █ █ ▄▀  █ █▄ █ ▄▀▀
-" █▀  █▄▄ ▀▄█ ▀▄█ █ █ ▀█ ▄██
+"          __          _
+"    ___  / /_ _____ _(_)__  ___
+"   / _ \/ / // / _ `/ / _ \(_-<
+"  / .__/_/\_,_/\_, /_/_//_/___/
+" /_/          /___/
+
 
 " Installing plug-in for nvim, if absent and auto-install plugins below
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
@@ -30,7 +34,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " {{  Themes }}
 Plug 'yuttie/hydrangea-vim'
 " {{  Code, language support, Snippets }}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'leafOfTree/vim-svelte-plugin'
 " Plug 'sheerun/vim-polyglot'

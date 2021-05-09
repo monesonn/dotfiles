@@ -1,10 +1,14 @@
-" ▄▀  ██▀ █▄ █ ██▀ █▀▄ ▄▀▄ █
-" ▀▄█ █▄▄ █ ▀█ █▄▄ █▀▄ █▀█ █▄▄
+"                               __
+"   ___ ____ ___  ___ _______ _/ /
+"  / _ `/ -_) _ \/ -_) __/ _ `/ /
+"  \_, /\__/_//_/\__/_/  \_,_/_/
+" /___/
 
-let mapleader = "\<Space>"  " Sets mapleader
+ " Sets mapleader
+let mapleader = "\<Space>"
 
-" Autoreloading config files
-autocmd! bufwritepost init.vim source $MYVIMRC " Auto-reload nvim when editing it
+" Auto-reload nvim when editing it or config files
+autocmd! bufwritepost init.vim source $MYVIMRC
 autocmd! bufwritepost general.vim source $MYVIMRC
 autocmd! bufwritepost functions.vim source $MYVIMRC
 autocmd! bufwritepost plugins.vim source $MYVIMRC
@@ -12,7 +16,7 @@ autocmd! bufwritepost plugins-settings.vim source $MYVIMRC
 autocmd! bufwritepost shortcuts.vim source $MYVIMRC
 autocmd! bufwritepost ui.vim source $MYVIMRC
 
-" Shortcut for reloading init.vim
+" Shortcut for reloading init.vim manually
 nnoremap <silent><leader>u :source $HOME/.config/nvim/init.vim<CR>
 
 set history=50      " Sets how many lines of history VIM has to remember
