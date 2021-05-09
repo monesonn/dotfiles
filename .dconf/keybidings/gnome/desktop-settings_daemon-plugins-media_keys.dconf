@@ -1,0 +1,42 @@
+[/]
+calculator=['<Super>c']
+control-center=['<Super>s']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/']
+home=@as []
+screensaver=['<Super>l']
+www=['<Super>b']
+
+[custom-keybindings/custom0]
+binding='<Primary><Alt>t'
+command='tilix'
+name='terminal'
+
+[custom-keybindings/custom1]
+binding='<Primary><Alt>s'
+command='tilix -e htop'
+name='htop'
+
+[custom-keybindings/custom2]
+binding='<Primary><Super>q'
+command='shutdown -h now'
+name='shutdown'
+
+[custom-keybindings/custom3]
+binding='<Primary><Super>r'
+command='reboot'
+name='reboot'
+
+[custom-keybindings/custom4]
+binding='<Primary><Super>e'
+command='gnome-session-quit --logout'
+name='logout'
+
+[custom-keybindings/custom5]
+binding='<Primary><Shift>s'
+command='gnome-system-monitor'
+name='monitor'
+
+[custom-keybindings/custom6]
+binding='<Super>f'
+command='Thunar'
+name='thunar'
