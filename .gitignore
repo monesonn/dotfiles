@@ -1,0 +1,3 @@
+# Ignore dotfile directory to avoid weird recursion problems
+
+.dotfiles/
