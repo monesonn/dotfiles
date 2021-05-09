@@ -5,149 +5,175 @@
 # 03. aliases
 
 # Reload .zshrc
-alias refresh="exec zsh"
+alias \
+    refresh="exec zsh" \
+    reload="exec zsh"
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
 # Youtube-dl
-alias yt="youtube-dl"
-alias ytu="youtube-dl -U"
-alias ytv-best="youtube-dl -f bestvideo+bestaudio"
-alias ytv-uploader="youtube-dl --output '$HOME/Videos/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-alias ytv-playlist="youtube-dl --output '$HOME/Videos/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
+alias \
+    yt="youtube-dl" \
+    ytu="youtube-dl -U" \
+    ytv-best="youtube-dl -f bestvideo+bestaudio" \
+    ytv-uploader="youtube-dl --output '$HOME/Videos/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'" \
+    ytv-playlist="youtube-dl --output '$HOME/Videos/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
 
-# Merging audio/video files
-alias merge-a="ffmpeg -f concat -safe 0 -i <(for f in ./*.mp3; do echo \"file '$PWD/$f'\"; done) -c copy output.mp3"
-alias soxa="sox *.mp3" 
-alias soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
-alias sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
+# Audio/Video processing (sox & ffpmeg)
+# Merging audio files into one and else..
+alias \
+    merge-a="ffmpeg -f concat -safe 0 -i <(for f in ./*.mp3; do echo \"file '$PWD/$f'\"; done) -c copy output.mp3" \
+    soxa="sox *.mp3" \
+    soxit='sox *.mp3 "$(pwd | sed "s#.*/##").mp3"' \
+    sox!='for File in *.mp3; { [ -f "$File" ] || continue; ffmpeg -i "$File" -ar 48000 -vsync 2 "${File%.mp3}_tmp.mp3" && \rm -v "$File" | sed "s/removed /[encoded]: /" && \mv "${File%.mp3}_tmp.mp3" "${File%.mp3}.mp3"; } 2>/dev/null && echo "[sox] started\!" && sox *.mp3 "$(pwd | sed "s#.*/##").mp3"'
 
 # Find and listen something
 alias listen='mpv --no-video "$(fd ".*.mp3$|.*.flac$|.*.aac$|.*.opus$" | fzf)"'
 
 # Flags
+# empty
 
-# Alias to modified commands
-alias cp="cp -i"
-alias rm="rm -i"
-alias mv="mv -i"
-alias du='du -sh'
-alias mkdir="mkdir -p"
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"'
-alias lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"'
-alias cat='bat'
-#alias find='fd'
-alias em="\emacs -nw"
-#alias emacs="emacsclient -c -a 'emacs'"
+# Aliases to existed commands.
+# NOTE: Use \ before command, like \command to call original command.
+alias \
+    cp="cp -iv" \
+    rm="rm -iv" \
+    mv="mv -iv" \
+    du='du -sh' \
+    mkdir="mkdir -p" \
+    ranger='ranger --choosedir=$HOME/.rangerdir; LASTRNDIR=`cat $HOME/.rangerdir`; cd "$LASTRNDIR"' \
+    lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"' \
+    cat='bat' \
+    find='fd' \
+    ls='exa' # icons only in 0.9 version
+
+    #emacs="emacsclient -c -a 'emacs'"
+
 
 # DOOM EMACS
-alias doomsync="~/.emacs.d/bin/doom sync"
-alias doomdoctor="~/.emacs.d/bin/doom doctor"
-alias doomupgrade="~/.emacs.d/bin/doom upgrade"
-alias doompurge="~/.emacs.d/bin/doom purge"
+alias \
+    doomsync="~/.emacs.d/bin/doom sync" \
+    doomdoctor="~/.emacs.d/bin/doom doctor" \
+    doomupgrade="~/.emacs.d/bin/doom upgrade" \
+    doompurge="~/.emacs.d/bin/doom purge" \
 
 # Alias chmod commands
-alias ax='chmod a+x'
-alias 000='chmod -R 000'
-alias 644='chmod -R 644'
-alias 666='chmod -R 666'
-alias 755='chmod -R 755'
-alias 777='chmod -R 777'
+alias \
+    ax='chmod a+x' \
+    000='chmod -R 000' \
+    644='chmod -R 644' \
+    666='chmod -R 666' \
+    755='chmod -R 755' \
+    777='chmod -R 777'
 
-# Shortcuts
-alias c="clear"
-alias clr="clear"
-alias t="touch"
-alias e="exit"
-alias q="exit"
-alias n="nvim"
-alias v="vim"
-alias h="help"
+# Shortcuts (lazy to group it, so I organize it by letter length)
 
-alias da='date "+%Y-%m-%d %A %T %Z"'
-alias tl="tail -f"
-alias rn="ranger"
-alias mk="mkdir"
-alias rf="rm -rf"
-alias ff="find . -type f -name"
-alias nf="neofetch"
+# 1-letter
+alias \
+    c="clear" \
+    clr="clear" \
+    t="touch" \
+    e="exit" \
+    q="exit" \
+    n="nvim" \
+    v="vim" \
+    h="help" \
 
-alias fdir="find . -type d -name"
-alias hgrep="history | grep"
-alias edit="$EDITOR"
-alias hist="history"
+# 2-letter
+alias \
+    da='date "+%Y-%m-%d %A %T %Z"' \
+    tl="tail -f" \
+    rn="ranger" \
+    mk="mkdir" \
+    rf="rm -rf" \
+    ff="find . -type f -name" \
+    nf="neofetch" \
+    em="\emacs -nw" \
 
-alias lol="lolcat"
-alias upd="sudo dnf update -y"
-alias fupd="flatpak update -y"
-alias pkgs="ls /usr/bin/ | wc -l"
-alias upda="sudo dnf update -y && flatpak update -y"
+# 3-letter
+alias \
+    lol="lolcat" \
+    gtt="trans -brief -t ru" \
+    wcp="wl-copy" \
+    wps="wl-paste" \
+    fdl="fd -l" \
+    fda="fd -a" \
+    upd="sudo dnf update -y"
 
-alias mpvc="mpv --geometry=50%x50%"
-alias mpvsw="mpv --geometry=20%x20% --border=no --ontop=yes"
+# 4-letter
+alias \
+    fdir="find . -type d -name" \
+    edit="$EDITOR" \
+    hist="history" \
+    fupd="flatpak update -y" \
+    pkgs="ls /usr/bin/ | wc -l" \
+    upda="sudo dnf update -y && flatpak update -y" \
+    mpvc="mpv --geometry=50%x50%" \
+    pcnt="sudo protonvpn connect --fastest" \
+    dict="trans :uk"
 
-alias pcnt="sudo protonvpn connect --fastest"
-alias pdcnt="sudo protonvpn disconnect"
+# 5-letter or more
+alias \
+    hgrep="history | grep" \
+    mpvsw="mpv --geometry=20%x20% --border=no --ontop=yes" \
+    pdcnt="sudo protonvpn disconnect" \
+    toeng="trans -brief :en" \
+    netrst="sudo systemctl restart NetworkManager.service" \
+    translate="trans -brief -t uk"
 
-alias translate="trans -brief -t uk"
-alias gtt="trans -brief -t ru"
-alias toeng="trans -brief :en"
-alias dict="trans :uk"
-
-alias wcp="wl-copy"
-alias wps="wl-paste"
-
-alias fdl="fd -l"
-alias fda="fd -a"
-
-alias netrst="sudo systemctl restart NetworkManager.service"
-
-# git
-alias addup='git add -u'
-alias addall='git add .'
-alias branch='git branch'
-alias checkout='git checkout'
-alias clone='git clone'
-alias commit='git commit -m'
-alias scommit='git commit -S -m'
-alias fetch='git fetch'
-alias pull='git pull origin'
-alias push='git push origin'
-alias status='git status'
-alias tag='git tag'
-alias newtag='git tag -a'
-alias config="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
+# git aliases
+alias \
+    addup='git add -u' \
+    addall='git add .' \
+    branch='git branch' \
+    checkout='git checkout' \
+    clone='git clone' \
+    commit='git commit -m' \
+    scommit='git commit -S -m' \
+    fetch='git fetch' \
+    pull='git pull origin' \
+    push='git push origin' \
+    status='git status' \
+    tag='git tag' \
+    newtag='git tag -a' \
+    config="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
 
 # gpg encryption
+
 # verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 # receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 # Configuration
-alias cfg='$EDITOR `fd ".*.conf$|.*.vim$|.*.lua$|.*.rc$|.*rc$|.*json$" --type file -H $HOME/.config -E "plugged" -E "coc" -E "schemes" | fzf`'
-alias hcfg='$EDITOR `fd "^\." -H --type file --maxdepth 1 | fzf`'
-alias zshrc="$EDITOR $HOME/.zshrc"
+alias \
+    cfg='$EDITOR `fd ".*.conf$|.*.vim$|.*.lua$|.*.rc$|.*rc$|.*json$" --type file -H $HOME/.config -E "plugged" -E "coc" -E "schemes" | fzf`' \
+    hcfg='$EDITOR `fd "^\." -H --type file --maxdepth 1 | fzf`' \
+    zshrc="$EDITOR $HOME/.zshrc"
 
 # Navigation
-alias ..='cd ..' 
-alias ...='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../..'
-alias .5='cd ../../../..'
-alias .6='cd ../../../../..'
-alias .f='cd "$DOTFILES_DIR"'
-alias bd='cd "$OLDPWD"'
-alias ohmz='cd "$ZSH"'
-alias j='cd `fd --type directory | fzf`'
-alias jj='cd `fd "" -H --type directory $HOME | fzf`'
-alias zz='z `z | fzf`'
+alias \
+    ..='cd ..'  \
+    ...='cd ../..' \
+    .3='cd ../../..' \
+    .4='cd ../../..' \
+    .5='cd ../../../..' \
+    .6='cd ../../../../..' \
+    .f='cd "$DOTFILES_DIR"' \
+    bd='cd "$OLDPWD"' \
+    ohmz='cd "$ZSH"' \
+    j='cd `fd --type directory | fzf`' \
+    jj='cd `fd "" -H --type directory $HOME | fzf`' \
+    zz='z `z | fzf`'
 
 # Changing "ls" to "lsd" or "exa"
-alias ls='exa' # icons only in 0.9 version 
-alias l='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
-alias lt='ls --tree'
-alias l.='ls -a | egrep "^\."'
+alias \
+    l='ls -l' \
+    la='ls -a' \
+    lla='ls -la' \
+    lt='ls --tree' \
+    l.='ls -a | egrep "^\."'
 
 # Get top process eating MEM
 alias psmem='ps auxf | sort -nr -k 4'
@@ -161,27 +187,31 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias jctl="journalctl -p 3 -xb"
 
 # Show current network connections
-# alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
-alias ipleak="curl https://ipv4.ipleak.net/json/"
-alias myip="http https://ipv4.ipleak.net/json/ | grep -E '.ip.:|.country_name.:'"
+alias \
+    ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'" \
+    ipleak="curl https://ipv4.ipleak.net/json/" \
+    myip="http https://ipv4.ipleak.net/json/ | grep -E '.ip.:|.country_name.:'" \
 
 # Switch between shells
 alias tobash="chsh -s $(which bash) && echo 'Now log out.'"
 alias tozsh="chsh -s $(which zsh)  && echo 'Now log out.'"
 
 # Usefull aliases
+alias \
+    omzu="omz update" \
+    hide_cursor="echo -ne '\e[?25l'" \
+    reappear_cursor="echo -ne '\e[?25h'" \
+    p10ku="git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull" \
+    scripts="ls ~/.local/bin" \
+    clck="echo -e `(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')`" \
+    mem="echo -e `(free -h | awk '/^Mem:/ {print $3 "/" $2}')`" \
+    upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ day/d/g' -e 's/ hours/h/g' -e 's/ hour/h/g' -e 's/ minutes/m/g' -e 's/, / /g')`" \
+    blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1" \
+    rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash' \
+    help="cht.sh"
 
-alias omzu="omz update"
-alias hide_cursor="echo -ne '\e[?25l'"
-alias reappear_cursor="echo -ne '\e[?25h'"
-alias p10ku="git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull"
-alias scripts="ls ~/.local/bin"
-alias clck="echo -e `(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')`"
-alias mem="echo -e `(free -h | awk '/^Mem:/ {print $3 "/" $2}')`"
-alias upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ day/d/g' -e 's/ hours/h/g' -e 's/ hour/h/g' -e 's/ minutes/m/g' -e 's/, / /g')`"
-alias blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
-alias help="cht.sh"
+
+# [ADDITIONAL] Functions
 
 function beamerpdf() {
     file=$(readlink -f "$1")
