@@ -4,6 +4,12 @@
 # (_)__/___/_//_/_/  \__/
 # 03. aliases
 
+# Edit dotfiles via bare repository.
+# Env variable $DOTFILES_DIR can be changed in env.zsh file.
+# Usage: . [git command]
+# NOTE: In theory, it doesn't override '.', but idk, mb in some cases it may.
+alias .="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
+
 # Reload .zshrc
 alias \
     refresh="exec zsh" \
