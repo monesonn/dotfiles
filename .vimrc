@@ -17,7 +17,7 @@ let configs = [
 \]
 
 for file in configs
-  let x = expand("~/.vim/rc/".file.".vim")
+  let x = expand("~/.vim/vimscript/".file.".vim")
   if filereadable(x)
     execute 'source' x
   endif
