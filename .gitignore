@@ -6,3 +6,8 @@
 
 .config/nvim/autoload/
 .config/nvim/plugged/
+
+# Vim
+
+.vim/autload/
+.vim/plugged/
