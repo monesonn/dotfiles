@@ -60,8 +60,8 @@ nnoremap <silent><C-n> :NERDTreeToggle %<CR>
 nnoremap <silent><C-z> :FZFExplore<CR>
 nnoremap <silent><C-f> :Files<CR>
 
-map <Leader>. :Ranger<CR>
-" nnoremap <silent><C-g> :Goyo \| set linebreak<CR>
+" map <Leader>. :Ranger<CR>
+nnoremap <silent><Leader>g :Goyo \| set linebreak<CR>
 
 " map <C>, :set hlsearch!<CR>
 
@@ -125,3 +125,12 @@ function! s:select_current_word()
   endif
   return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
+
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
