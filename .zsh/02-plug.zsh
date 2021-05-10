@@ -11,6 +11,7 @@ plugins=(
     z
     zsh-syntax-highlighting
     zsh-autosuggestions
+    zsh-completions
     dnf
     emoji
     sudo

@@ -181,13 +181,12 @@ alias \
     lt='ls --tree' \
     l.='ls -a | egrep "^\."'
 
-# Get top process eating MEM
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-
-# Get top process eating CPU
-alias pscpu='ps auxf | sort -nr -k 3'
-alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+# Get top process eating {MEM,CPU}
+alias \
+    psmem='ps auxf | sort -nr -k 4' \
+    psmem10='ps auxf | sort -nr -k 4 | head -10' \
+    pscpu='ps auxf | sort -nr -k 3' \
+    pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
 # Get error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
