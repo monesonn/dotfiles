@@ -9,5 +9,5 @@
 
 # Vim
 
-.vim/autload/
+.vim/autoload/
 .vim/plugged/
