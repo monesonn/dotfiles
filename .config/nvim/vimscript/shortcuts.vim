@@ -9,6 +9,12 @@ map <C-u> :red<CR>
 " Faster in-line navigation
 noremap W 5w
 noremap B 5b
+noremap j gj
+noremap k gk
+noremap 9 0
+noremap 0 $
+noremap ( g0
+noremap ) g$
 
 " Remove all macros
 map <leader>dm :del a-zA-Z0-9<cr>
@@ -42,11 +48,30 @@ map <leader>Right :bnext<cr>
 map <leader>Left :bprevious<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove<cr>
-map tt :tabnext<cr> 
+nnoremap tn :tabnew<cr>
+nnoremap to :tabonly<cr>
+nnoremap tc :tabclose<cr>
+nnoremap tm :tabmove<cr>
+nnoremap tt :tabnext<cr>
+nnoremap tp :tabprevious<cr>
+
+nnoremap <silent><leader><right> :tabnext<cr>
+nnoremap <silent><leader><left> :tabprevious<cr>
+
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent><c-[> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent><c-[> :exe "tabn ".g:lasttab<cr>
 
 " Jump to nvim config file
 noremap <silent> <leader>rc :e $HOME/.config/nvim/init.vim<CR>
@@ -95,7 +120,7 @@ map <leader>h <C-w>s
 "autocmd filetype rust nnoremap <F5> :w <bar> exec '!rustc '.shellescape('%').' && ./.shellescape('%:r')<CR> 
 "autocmd filetype markdown nnoremap <F5> :w <bar> exec '!pandoc .shellescape('%') -t beamer --pdf-engine=xelatex -o '.shellescape('%').pdf' && mupdf '.shellescape('%').pdf'<CR>
 
-nnoremap <silent> <F5> :silent QuickRun <CR>
+nnoremap <silent><F5> :w <bar> :silent QuickRun <cr><C-w>l
 
 map <C>. :cnext<CR>
 map <C>/ :cprevious<CR>
@@ -110,7 +135,7 @@ nnoremap <silent><C-l> :Lines<CR>
 nnoremap <silent><C-s> :Snippets<CR>
 " nnoremap <silent><C-m> :Marks<CR>
 " nnoremap <silent><C-n> :Commits<CR>
-nnoremap <silent><C-m> :Commands<CR>
+nnoremap <silent><C-space> :Commands<CR>
 
 nmap <silent><C-c> <Plug>(coc-cursors-position)
 nmap <leader>x <Plug>(coc-cursors-operator)
@@ -126,11 +151,4 @@ function! s:select_current_word()
   return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
 
-nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
-nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+nnoremap <F8> :TagbarToggle<CR>

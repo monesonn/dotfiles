@@ -89,7 +89,7 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
-nnoremap <silent><leader>0 :call ToggleHiddenAll()<CR>
+nnoremap <silent><leader>- :call ToggleHiddenAll()<CR>
 nnoremap <silent><leader>s :call ToggleSignColumn()<CR>
 
 "======================="
