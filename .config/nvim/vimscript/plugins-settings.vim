@@ -4,53 +4,10 @@
 "  / .__/_/\_,_/\_, /_/_//_(_)__/\___/_//_/_/
 " /_/          /___/
 
-let g:dashboard_custom_header = [
-    \'        ▄█          █          █▄          ',
-    \'      ▐██      ▄█  ███  █▄      ██▌        ',
-    \'     ▐██▌     ██████████████     ▐██▌      ',
-    \'    ████     ████████████████    ████      ',
-    \'    ▐█████  ██████████████████  █████▌     ',
-    \'    ████████████████████████████████       ',
-    \'     ███████▀▀████████████▀▀███████        ',
-    \'      █████▌  ▄▄ ▀████▀ ▄▄  ▐█████         ',
-    \'    ▄▄██████▄ ▀▀  ████  ▀▀ ▄██████▄▄       ',
-    \'    ██████████████████████████████████     ',
-    \'  ████████████████████████████████████     ',
-    \' ██████   ███████▀▄██▄▀███████   ██████▌   ',
-    \'▐█████     ██████████████████      █████▌  ',
-    \' ▐█████      ██████▀  ▀██████       █████▌ ',
-    \'  █████▄      ███        ███      ▄█████   ',
-    \'    ██████     █          █     ██████     ',
-    \'     █████                     █████       ',
-    \'      █████                   █████        ',
-    \'      ████   ▄            ▄    ████        ',
-    \'        ████ ██           ██ ████          ',
-    \'          ████████ ▄██▄ ████████           ',
-    \'         ████████████████████████          ',
-    \'         ████████████████████████          ',
-    \'          ▀█████████▀▀█████████▀           ',
-    \'            ▀███▀       ▀███▀              ',
-      \ ]
+" Vimwiki
 
-let g:dashboard_default_executive='telescope'
-let g:indentLine_fileTypeExclude = ['dashboard']
-let g:dashboard_fzf_float=0
-
-let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified', 'charvaluehex' ] ]
-      \ },
-      \ 'component': {
-      \   'charvaluehex': '0x%B'
-      \ },
-      \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-      \ 'subseparator': { 'left': '|', 'right': '|' },
-      \ }
-
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      " \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " => NerdTree <=
 
@@ -86,7 +43,7 @@ let g:go_diagnostics_enable = 1
 
 " Auto formatting and importing, silent fail
 let g:go_fmt_autosave = 1
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 
 " Status line types
@@ -123,6 +80,7 @@ let g:gitgutter_enabled=1
 let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-git',
+            \ 'coc-lua',
             \ 'coc-prettier',
             \ 'coc-svelte',
             \ 'coc-snippets',
@@ -162,26 +120,10 @@ call wilder#set_option('pipeline', [
 "au! BufNewFile,BufRead *.svelte set ft=html
 let g:vim_svelte_plugin_load_full_syntax = 1
 
-function! OnChangeSvelteSubtype(subtype)
-  echom 'Subtype is '.a:subtype
-  if empty(a:subtype) || a:subtype == 'html'
-    setlocal commentstring=<!--%s-->
-    setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
-  elseif a:subtype =~ 'css'
-    setlocal comments=s1:/*,mb:*,ex:*/ commentstring&
-  else
-    setlocal commentstring=//%s
-    setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-  endif
-endfunction
-
-autocmd FileType svelte inoremap <buffer><expr> OnChangeSvelteSubtype()
-
 let g:fzf_layout = { 'down': '30%' }
 let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -195,3 +137,5 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" autocmd CursorHold * silent call CocActionAsync('highlight')
