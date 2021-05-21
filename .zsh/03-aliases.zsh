@@ -52,6 +52,7 @@ alias \
     lf='lf -last-dir-path=$HOME/.lfdir; LASTLFDIR=`cat $HOME/.lfdir`; cd "$LASTLFDIR"' \
     cat='bat' \
     find='fd' \
+    docker='podman' \
     ls='exa' # icons only in 0.9 version
 
     #emacs="emacsclient -c -a 'emacs'"
@@ -234,6 +235,6 @@ go_update () {
     arch=$(case "$(uname -m)" in i*) echo '386' ;; x*) echo 'amd64' ;; *) echo 'armv61'; esac)
 
     curl --silent https://storage.googleapis.com/golang/$release.$os-$arch.tar.gz | sudo tar -vxz --strip-components 1 -C /usr/local/go
-    exec zsh
     echo "updated to $(go version)"
+    exec zsh
 }
