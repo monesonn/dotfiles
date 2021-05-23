@@ -238,3 +238,15 @@ go_update () {
     echo "updated to $(go version)"
     exec zsh
 }
+
+bak () {
+    while [ "$#" -gt 0 ]; do
+        if [ "${1##*.}" = "bak" ]; then
+            mv "$1" "${1%.bak}"
+            shift
+        else
+            mv $1 $1.bak
+            shift
+        fi
+    done
+}
