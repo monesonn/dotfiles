@@ -1,0 +1,4 @@
+exec mako
+exec autotiling
+# exec_always /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.90
+# exec mpd ~/.config/mpd/mpd.conf
