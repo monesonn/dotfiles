@@ -25,9 +25,9 @@ export MANPAGER="nvim -c 'set ft=man' -"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # Adding GO
-export GOPATH=$HOME/.go
-export GOBIN="$GOPATH/bin"
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+# export GOPATH=$HOME/.go
+# export GOBIN="$GOPATH/bin"
+# export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Setting NVM 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -62,3 +62,14 @@ unset __conda_setup
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 	source /etc/profile.d/vte.sh
 fi
+
+# Wayland
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_WEBRENDER=1
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt5ct
+export _JAVA_AWT_WM_NONREPARENTING=1
+export GDK_BACKEND="wayland,x11"
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=wayland
+export SDL_VIDEODRIVER=wayland

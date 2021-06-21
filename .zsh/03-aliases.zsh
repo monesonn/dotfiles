@@ -53,6 +53,9 @@ alias \
     cat='bat' \
     find='fd' \
     docker='podman' \
+    sudo='doas' \
+    sudoedit='doas $EDITOR' \
+    ed='ed -p :' \
     ls='exa' # icons only in 0.9 version
 
     #emacs="emacsclient -c -a 'emacs'"
@@ -93,10 +96,10 @@ alias \
     tl="tail -f" \
     rn="ranger" \
     mk="mkdir" \
-    rf="rm -rf" \
     ff="find . -type f -name" \
     nf="neofetch" \
     em="\emacs -nw" \
+    # rf="rm -rf" \
 
 # 3-letter
 alias \
@@ -214,7 +217,8 @@ alias \
     upt="echo `(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ day/d/g' -e 's/ hours/h/g' -e 's/ hour/h/g' -e 's/ minutes/m/g' -e 's/, / /g')`" \
     blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1" \
     rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash' \
-    help="cht.sh"
+    help="cht.sh" \
+    bluez_a2dp="pactl set-card-profile `grep bluez <(pactl list short) | tail -n 1 | awk '{print $2}'` a2dp-sink-aac"
 
 
 # [ADDITIONAL] Functions
@@ -249,4 +253,32 @@ bak () {
             shift
         fi
     done
+}
+
+nn ()
+{
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, remove the "export" as in:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    # NOTE: NNN_TMPFILE is fixed, should not be modified
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            \. "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
 }

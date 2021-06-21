@@ -14,8 +14,9 @@ plugins=(
     zsh-completions
     dnf
     emoji
-    sudo
-    #doas
+    # sudo
+    doas
+    zsh_reload
     extract
     ripgrep
     fd
