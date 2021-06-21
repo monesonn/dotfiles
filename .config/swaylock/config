@@ -1,14 +1,12 @@
 # Default look
-# clock
+clock
 indicator
-# no-unlock-indicator
-# daemonize
+no-unlock-indicator
+daemonize
 indicator-caps-lock
-# timestr=%a, %B %d
-# datestr=%I:%M %p
-# image=~/wallpapers/darkbrr_1440p.png
+timestr=%a, %B %d
+datestr=%I:%M %p
 screenshots
-grace=2
 
 # Effects
 scaling=fill
@@ -16,9 +14,10 @@ effect-scale=1.4
 effect-blur=9x9
 effect-vignette=0.8:0.8
 fade-in=0.3
+# grace=2
 
 # Ring
-indicator-radius=230
+indicator-radius=100
 indicator-thickness=5
 line-uses-ring
 line-uses-inside
@@ -38,13 +37,12 @@ separator-color=#5e81ac00
 layout-text-color=#eceff400
 line-wrong-color=#d08770
 
-
 # Profile image
 # effect-compose=/home/bryan/.config/swaylock/profile.png
 
 # Text color
-font-size=20
-font=JetbrainsMono
+# font-size=11
+# font=monospace
 text-color=#d8dee900
 text-clear-color=#d8dee900
 text-ver-color=#d8dee900
