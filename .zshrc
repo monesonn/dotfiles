@@ -10,4 +10,4 @@
 for config (~/.zsh/*.zsh) source $config
 
 # put fortunes at startup
-echo "\033[1;34m$(fortune -s)\033[m\n"
+# echo "\033[1;34m$(fortune -s)\033[m\n"

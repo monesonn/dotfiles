@@ -218,7 +218,8 @@ alias \
     blife="upower -i /org/freedesktop/UPower/devices/battery_BAT1" \
     rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash' \
     help="cht.sh" \
-    bluez_a2dp="pactl set-card-profile `grep bluez <(pactl list short) | tail -n 1 | awk '{print $2}'` a2dp-sink-aac"
+    bluez_a2dp="pactl set-card-profile $(grep bluez <(pactl list short) | tail -n 1 | awk '{print $2}') a2dp-sink-aac"
+    # bconnect="bluetoothctl -- connect $(bluetoothctl -- devices | fzf | awk '{print $2}')"
 
 
 # [ADDITIONAL] Functions
