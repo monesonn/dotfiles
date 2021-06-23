@@ -1,7 +1,7 @@
 # Default look
-clock
+# clock
 indicator
-no-unlock-indicator
+# no-unlock-indicator
 daemonize
 indicator-caps-lock
 timestr=%a, %B %d
@@ -10,8 +10,10 @@ screenshots
 
 # Effects
 scaling=fill
+effect-greyscale
 effect-scale=1.4
 effect-blur=9x9
+effect-pixelate=3x3
 effect-vignette=0.8:0.8
 fade-in=0.3
 # grace=2
@@ -34,15 +36,15 @@ ring-clear-color=#ebcb8b
 ring-color=#4c566a00
 key-hl-color=#d08770
 separator-color=#5e81ac00
-layout-text-color=#eceff400
+# layout-text-color=#eceff400
 line-wrong-color=#d08770
 
 # Profile image
 # effect-compose=/home/bryan/.config/swaylock/profile.png
 
 # Text color
-# font-size=11
-# font=monospace
+font-size=11
+font=monospace
 text-color=#d8dee900
 text-clear-color=#d8dee900
 text-ver-color=#d8dee900
