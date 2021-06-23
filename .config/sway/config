@@ -1,8 +1,18 @@
+#     ____    _____ ___ __
+#    (_-< |/|/ / _ `/ // /
+#   /___/__,__/\_,_/\_, /
+#     config file  /___/
+
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
+
+### Includes
+include /etc/sway/config.d/*
+include ~/.config/sway/decoration
+include ~/.config/sway/autostart
 
 ### Variables
 #
@@ -86,7 +96,7 @@ input * {
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+p exec $menu
 
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -97,7 +107,7 @@ input * {
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -152,14 +162,23 @@ input * {
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+    bindsym Ctrl+$mod+k exec ~/.config/sway/scripts/workspace.sh right
+    bindsym Ctrl+$mod+j exec ~/.config/sway/scripts/workspace.sh left
+    bindsym Ctrl+$mod+Right exec ~/.config/sway/scripts/workspace.sh right
+    bindsym Ctrl+$mod+Left exec ~/.config/sway/scripts/workspace.sh left
+
+    bindsym Ctrl+Alt+k exec ~/.config/sway/scripts/move-to-workspace.sh right
+    bindsym Ctrl+Alt+j exec ~/.config/sway/scripts/move-to-workspace.sh left
+    bindsym Ctrl+Alt+Right exec ~/.config/sway/scripts/move-to-workspace.sh right
+    bindsym Ctrl+Alt+Left exec ~/.config/sway/scripts/move-to-workspace.sh left
 #
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+    # bindsym $mod+b splith
+    # bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -248,6 +267,7 @@ bar {
         # background #323232
         # inactive_workspace #32323200 #32323200 #5c5c5c
         statusline #7f7f7f
+        # statusline #999999
         background #000000
         inactive_workspace #000000 #000000 #404040
         active_workspace #000000 #000000 #ffffff
@@ -255,14 +275,13 @@ bar {
     }
 }
 
-include /etc/sway/config.d/*
-include ~/.config/sway/decoration
-include ~/.config/sway/autostart
-
 # Screenshot
-bindsym --release Print exec --no-startup-id "grim $(xdg-user-dir PICTURES)/$(date +'%s_grim.png')"
-bindsym --release Shift+Print exec --no-startup-id "grim -g $(slurp)"
-bindsym --release Ctrl+Print exec --no-startup-id "grim - | wl-copy"
+bindsym --release Print exec "grim ${XDG_CONFIG_VIDEOS:-$HOME/pictures}/$(date +'%s_grim.png')"
+bindsym Shift+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym Ctrl+Print exec "grim - | wl-copy"
+bindsym $mod+Print exec "wf-recorder --audio bluez_output.A8_4D_4A_F4_63_99.a2dp-sink -f ${XDG_CONFIG_VIDEOS:-$HOME/videos}/recording_$(date +\"%Y-%m-%d_%H:%M:%S.mp4\")"
+bindsym Ctrl+$mod+Shift+Print exec wf-recorder -g "$(slurp)" -f ~/videos/screencast/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
+bindsym $mod+Shift+Print exec killall -s SIGINT wf-recorder
 
 set $power_mode "power"
 bindsym $mod+Shift+p      mode $power_mode
@@ -282,7 +301,7 @@ mode $power_mode {
 # Press $mod+o followed by either f, t, Esc or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
 set $mode_launcher Launcher
-bindsym $mod+o mode "$mode_launcher"
+bindsym $mod+Shift+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
     bindsym a exec nwggrid
@@ -342,8 +361,14 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym $mod+n exec nwggrid
 bindsym $mod+l exec swaylock
 
-bindsym ctrl+p bar mode toggle
+bindsym Ctrl+p bar mode toggle
 bindsym Mod1+Tab workspace back_and_forth
 
-bindsym $mod+Tab workspace prev
-bindsym ctrl+Tab workspace next
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+bindsym $mod+b exec $browser
+bindsym $mod+o exec nwggrid
+bindsym $mod+t exec /$HOME/apps/telegram/Telegram
+
+bindsym ctrl+$mod+a exec "autotiling"
