@@ -1,4 +1,10 @@
-exec mako
-exec autotiling
+### Autostart
+exec {
+    ~/.config/sway/scripts/autotiling/main.py
+}
+exec_always {
+    mako
+}
+# exec autotiling -w 1 3 5
 # exec_always /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.90
 # exec mpd ~/.config/mpd/mpd.conf
