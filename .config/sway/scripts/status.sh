@@ -12,7 +12,11 @@ SOURCE=1
 
 # Uptime
 uptime_formatted=$(uptime | cut -d ',' -f1  | cut -d ' ' -f4,5)
+sc_uptime="↑$uptime_formatted"
+
+# Date
 date_formatted=$(date "+%a %F %H:%M:%S %p")
+sc_date="  $date_formatted"
 
 # Linux kernel version
 linux_version=$(uname -r | cut -d '-' -f1)
@@ -25,6 +29,7 @@ name=$(whoami)
 wifi_power=$(nmcli dev status | grep -iw 'wifi' | head -n 1 | awk '{print $3}')
 wifi_name=$(iw dev wlp1s0 link | grep SSID | cut -d: -f2)
 wifi_name_short=$(printf "%s" $wifi_name | cut -c 1-11)
+wifi_addr=$(ip -4 addr show wlp1s0 | grep -i 'inet' | awk '{print $2}')
 
 if [ $wifi_power = "connected" ]; then
     wifi_icon=""
@@ -34,7 +39,7 @@ else
     wifi_icon="睊"
 fi
 
-sc_wifi="$wifi_icon  $wifi_name_short"
+sc_wifi="$wifi_icon  $wifi_addr "
 
 # Bluetooth
 bluetooth_power=$(bluetoothctl show | grep -i powered | cut -d: -f2-)
@@ -72,7 +77,7 @@ title=$(playerctl metadata "title")
 if [ -z $title ]; then
     sc_track=""
 else
-    sc_track="  $(printf "%s " $title | cut -c 1-50) |"
+    sc_track="  $(printf "%s " $title | cut -c 1-50)|"
 fi
 
 # Volume
@@ -99,10 +104,28 @@ sc_micro="$source_icon $current_source_volume%"
 # Memory
 current_mem=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
 current_mem_rounded=`printf "%.2f" $current_mem`
+sc_mem=" $current_mem_rounded%"
 
 # CPU
 current_cpu=$(cat /proc/stat | grep 'cpu ' | awk '{print ($2+$4)*100/($2+$4+$5)}')
 current_cpu_rounded=`printf "%.2f" $current_cpu`
+
+cpu_temp_value=$(sensors | grep edge | awk '{print $2}' | cut -c 2-3)
+
+if [ $cpu_temp_value -ge 40 ]; then
+    temp_icon=""
+elif [ $cpu_temp_value -ge 50 ]; then
+    temp_icon=""
+elif [ $cpu_temp_value -ge 60 ]; then
+    temp_icon=""
+elif [ $cpu_temp_value -ge 75 ]; then
+    temp_icon=""
+else
+    temp_icon=""
+fi
+
+cpu_temp="$temp_icon +$cpu_temp_value°C"
+sc_cpu=" $current_cpu_rounded%"
 
 # Battery
 
@@ -145,8 +168,10 @@ sc_battery="$battery_icon $battery_level%"
 
 # Keyboard
 keyboard_layout=`swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '"' -f4`
+sc_keyboard="  $keyboard_layout"
 
 # " $name@$hostname  " \
+# " $linux_version | " \
 printf "%s" \
     "$sc_track " \
     "$sc_wifi " \
@@ -154,10 +179,9 @@ printf "%s" \
     "$sc_brightness " \
     "$sc_volume " \
     "$sc_micro | " \
-    "  $current_cpu_rounded% " \
-    "  $current_mem_rounded% " \
-    "↑$uptime_formatted " \
-    " $linux_version | " \
-    "  $keyboard_layout | " \
+    "$sc_cpu $cpu_temp | " \
+    "$sc_mem | " \
+    "$sc_uptime | " \
+    "$sc_keyboard | " \
     "$sc_battery | " \
-    "  $date_formatted"
+    "$sc_date"
