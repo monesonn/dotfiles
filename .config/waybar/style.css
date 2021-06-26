@@ -1,0 +1,95 @@
+@keyframes blink-warning {
+  70% {
+    color: white;
+  }
+
+  to {
+    color: orange;
+  }
+}
+
+@keyframes blink-critical {
+  70% {
+    color: white;
+  }
+
+  to {
+    color: red;
+  }
+}
+
+window.eDP-1 * {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+
+  font-family: Cozette, TerminessTTF Nerd Font Mono, sans-serif;
+  font-size: 11px;
+}
+
+window#waybar {
+  background: #000000;
+  color: #7f7f7f;
+}
+
+window .modules-left #workspaces {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#workspaces button {
+  color: #7f7f7f;
+  min-height: 0;
+  min-width: 25px;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+
+#workspaces button.focused {
+  color: #ffffff;
+}
+
+#mode,
+#clock,
+#network,
+#cpu,
+#memory,
+#backlight,
+#keyboard,
+#pulseaudio,
+#custom-dnf,
+#custom-weather,
+#custom-keyboard-layout,
+#custom-media,
+#custom-power,
+#custome-uptime,
+#tray,
+#battery {
+  padding: 0 5px;
+  margin: 0 1px;
+}
+
+#mode {
+  background: #222222;
+  color: red;
+}
+
+#battery.charging {
+  color: #26a65b;
+}
+
+#battery.warning:not(.charging) {
+  animation-name: blink-warning;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
