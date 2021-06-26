@@ -32,21 +32,27 @@ wifi_name_short=$(printf "%s" $wifi_name | cut -c 1-11)
 wifi_addr=$(ip -4 addr show wlp1s0 | grep -i 'inet' | awk '{print $2}')
 
 if [ $wifi_power = "connected" ]; then
-    wifi_icon=""
+    wifi_icon=""
 elif [ $wifi_power =~ "connecting*" ]; then
-    wifi_icon=""
+    wifi_icon="ﯳ"
 else
-    wifi_icon="睊"
+    wifi_icon=""
 fi
 
 sc_wifi="$wifi_icon  $wifi_addr "
+
+# Network traffic
+
+# rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
+# tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
+
 
 # Bluetooth
 bluetooth_power=$(bluetoothctl show | grep -i powered | cut -d: -f2-)
 bluetooth_name=$(bluetoothctl info | grep -i name | cut -d ':' -f2-)
 
 if [ $bluetooth_power = "yes" ]; then
-    sc_bluetooth="$bluetooth_name"
+    sc_bluetooth="$bluetooth_name"
 else
     sc_bluetooth=""
 fi
@@ -68,7 +74,6 @@ fi
 sc_brightness="$brightness_icon  $current_brightness_rounded%"
 
 # Currently playing
-artist=$(playerctl metadata "artist")
 title=$(playerctl metadata "title")
 
 # track=$(printf "%s" "$artist - $title")
@@ -77,7 +82,21 @@ title=$(playerctl metadata "title")
 if [ -z $title ]; then
     sc_track=""
 else
-    sc_track="  $(printf "%s " $title | cut -c 1-50)|"
+    if [[ $(playerctl status) = "Playing" ]]; then
+        media_icon=""
+    else
+        media_icon=""
+    fi
+
+    track_current_duration=$(playerctl metadata --format '{{duration(position)}}')
+    track_total_duration=$(playerctl metadata --format '{{duration(mpris:length)}}')
+    track_duration="$track_current_duration-$track_total_duration"
+
+    if [ $track_total_duration != "" ]; then
+        sc_track="$media_icon  $(printf "%s " $title | cut -c 1-40) [$track_duration] |"
+    else
+        sc_track="$media_icon  $(printf "%s " $title | cut -c 1-40) |"
+    fi
 fi
 
 # Volume
@@ -110,21 +129,22 @@ sc_mem=" $current_mem_rounded%"
 current_cpu=$(cat /proc/stat | grep 'cpu ' | awk '{print ($2+$4)*100/($2+$4+$5)}')
 current_cpu_rounded=`printf "%.2f" $current_cpu`
 
-cpu_temp_value=$(sensors | grep edge | awk '{print $2}' | cut -c 2-3)
+# cpu_temp_value=$(sensors | grep edge | awk '{print $2}' | cut -c 2-3)
 
-if [ $cpu_temp_value -ge 40 ]; then
-    temp_icon=""
-elif [ $cpu_temp_value -ge 50 ]; then
-    temp_icon=""
-elif [ $cpu_temp_value -ge 60 ]; then
-    temp_icon=""
-elif [ $cpu_temp_value -ge 75 ]; then
-    temp_icon=""
-else
-    temp_icon=""
-fi
+# if [ $cpu_temp_value -ge 40 ]; then
+#     temp_icon=""
+# elif [ $cpu_temp_value -ge 50 ]; then
+#     temp_icon=""
+# elif [ $cpu_temp_value -ge 60 ]; then
+#     temp_icon=""
+# elif [ $cpu_temp_value -ge 70 ]; then
+#     temp_icon=""
+# else
+#     temp_icon=""
+# fi
 
-cpu_temp="$temp_icon +$cpu_temp_value°C"
+# cpu_temp="$temp_icon +$cpu_temp_value°C"
+
 sc_cpu=" $current_cpu_rounded%"
 
 # Battery
@@ -167,11 +187,19 @@ fi
 sc_battery="$battery_icon $battery_level%"
 
 # Keyboard
-keyboard_layout=`swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '"' -f4`
+keyboard_layout=`swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '"' -f4 | cut -c 1,2 | tr '[A-Z]' '[a-z]'`
+
+if [ $keyboard_layout = "us" ] || [ $keyboard_layout = "de" ] || [ $keyboard_layout = "cz" ]; then
+    keyboard_layout="la"
+elif [ $keyboard_layout = "uk" ] || [ $keyboard_layout = "be" ] || [ $keyboard_layout = "ru" ]; then
+    keyboard_layout="cy"
+fi
+
 sc_keyboard="  $keyboard_layout"
 
 # " $name@$hostname  " \
 # " $linux_version | " \
+# "$sc_cpu $cpu_temp | " \
 printf "%s" \
     "$sc_track " \
     "$sc_wifi " \
@@ -179,7 +207,7 @@ printf "%s" \
     "$sc_brightness " \
     "$sc_volume " \
     "$sc_micro | " \
-    "$sc_cpu $cpu_temp | " \
+    "$sc_cpu | " \
     "$sc_mem | " \
     "$sc_uptime | " \
     "$sc_keyboard | " \
