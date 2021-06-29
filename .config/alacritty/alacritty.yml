@@ -1,4 +1,4 @@
-background_opacity: 0.90
+background_opacity: 0.80
 live_config_reload: true
 startup_mode: Fullscreen
 decorations: none
@@ -13,12 +13,12 @@ class:
 
 font:
     normal:
-        family: GohuFont Nerd Font Mono
-        size: Regular
+        family: Cozette
+        size: Medium
     bold:
-        family: GohuFont Nerd Font Mono
-        size: Regular
-    size: 12.0
+        family: Cozette
+        size: Medium
+    size: 14.0
     offset:
         x: 1
         y: 1
