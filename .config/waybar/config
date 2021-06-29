@@ -9,15 +9,17 @@
     "custom/weather",
     "custom/dnf",
     "custom/uptime",
-    "tray"
+    "tray",
+    "sway/mode"
   ],
-  "modules-center": ["sway/workspaces", "sway/mode"],
+  "modules-center": ["sway/workspaces"],
   "modules-right": [
     "backlight",
     "pulseaudio",
     "cpu",
     "memory",
     "network",
+    "custom/bluetooth",
     "custom/keyboard-layout",
     "battery",
     "clock#time",
@@ -53,7 +55,7 @@
   "clock#time": {
     "interval": 1,
     "format": " {:%H:%M:%S}",
-    "tooltip-format": "{:%e %B %Y}"
+    "tooltip-format": "{:%A, %e %B %Y}"
   },
 
   "cpu": {
@@ -77,20 +79,24 @@
 
   "custom/power": {
     "format": "⏻",
-    "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+    "on-click": "nwgbar",
+    "tooltip": false
   },
 
   "custom/weather": {
     "exec": "curl 'wttr.in/?format=%t'",
+    "exec-if": "command -v curl 1>/dev/null",
     "format": "w: {}",
     "interval": 3600,
     "tooltip": false
   },
 
+  // "exec": "dnf check-update | grep -ie 'fc[0-9][0-9]' | wc -l", // # updates
   "custom/dnf": {
     "format": " {}",
     "interval": 3600, // every hour
-    "exec": "dnf check-update | wc -l", // # of updates
+    "exec": "dnf list updates | grep -A5000 -m1 -e 'Available Upgrades' | tail -n+2 | wc -l", // # of updates
+    "exec-if": "test $(dnf list updates | grep -A5000 -m1 -e 'Available Upgrades' | tail -n+2 | wc -l) -gt 0",
     "signal": 8,
     "tooltip": false
   },
@@ -109,7 +115,7 @@
     "format-wifi": " {ipaddr}/{cidr}", // Icon: wifi
     "format-ethernet": " {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
     "format-disconnected": "⚠  Disconnected",
-    "tooltip-format-wifi": "ifname: {ifname},\nessid: {essid}\nsignal: {signalStrength}%",
+    "tooltip-format-wifi": "ifname:\t{ifname}\nessid:\t{essid}\nsignal:\t{signalStrength}%",
     "tooltip-format-ethernet": "{ifname} "
   },
 
@@ -193,12 +199,24 @@
 
   "custom/uptime": {
     "exec": "uptime | cut -d ',' -f1  | cut -d ' ' -f4,5",
-    "format": "{}",
+    "interval": 60,
+    "format": "up: {}",
+    "tooltip": false
+  },
+
+  "custom/bluetooth": {
+    "format": "{icon}",
+    "format-icons": {
+      "yes": "",
+      "no": "",
+      "default": ""
+    },
+    "exec": "bluetoothctl show | grep -i powered | cut -d: -f2- | tr -d ' '",
     "tooltip": false
   },
 
   "tray": {
-    "icon-size": 10,
+    "icon-size": 8,
     "spacing": 10
   }
 }

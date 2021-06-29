@@ -1,3 +1,9 @@
+@keyframes blink {
+  70% {
+    color: white;
+  }
+}
+
 @keyframes blink-warning {
   70% {
     color: white;
@@ -32,9 +38,10 @@ window.eDP-1 * {
 window#waybar {
   background: #000000;
   color: #7f7f7f;
+  border-radius: 0;
 }
 
-window .modules-left #workspaces {
+window .modules-center #workspaces {
   min-height: 0;
   margin: 0;
   padding: 0;
@@ -43,7 +50,7 @@ window .modules-left #workspaces {
 #workspaces button {
   color: #7f7f7f;
   min-height: 0;
-  min-width: 25px;
+  min-width: 15px;
   border-radius: 0;
   box-shadow: none;
   text-shadow: none;
@@ -70,15 +77,26 @@ window .modules-left #workspaces {
 #custom-keyboard-layout,
 #custom-media,
 #custom-power,
+#custom-bluetooth,
 #custome-uptime,
-#tray,
 #battery {
   padding: 0 5px;
   margin: 0 1px;
 }
 
+#tray {
+  padding: 0 5px;
+  margin: 0 10px;
+}
+
 #mode {
-  background: #222222;
+  /* background: #222222; */
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin: 0 10px;
   color: red;
 }
 
@@ -87,7 +105,7 @@ window .modules-left #workspaces {
 }
 
 #battery.warning:not(.charging) {
-  animation-name: blink-warning;
+  animation-name: blink;
   animation-duration: 5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
