@@ -11,9 +11,17 @@
 -- Author: Stanislav <git.io/monesonn>
 -- Link:   http://git.io/.mn
 
-vim.cmd('source ~/.config/nvim/vimscript/general.vim')
-vim.cmd('source ~/.config/nvim/vimscript/plugins.vim')
+local modules = {
+    'general',
+    'plugins'
+}
+
+for i=1, #modules do
+    require("modules/" .. modules[i])
+end
+
 vim.cmd('source ~/.config/nvim/vimscript/plugins-settings.vim')
 vim.cmd('source ~/.config/nvim/vimscript/ui.vim')
 vim.cmd('source ~/.config/nvim/vimscript/shortcuts.vim')
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
+

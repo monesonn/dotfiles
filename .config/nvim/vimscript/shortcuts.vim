@@ -3,6 +3,10 @@
 "  (_-</ _ \/ _ \/ __/ __/ __/ // / __(_-<
 " /___/_//_/\___/_/  \__/\__/\_,_/\__/___/
 
+
+" Save file as sudo on files that require root permission
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 " u - undo, ctrl & u - redo
 map <C-u> :red<CR>
 
@@ -70,8 +74,8 @@ noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
 au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent><c-[> :exe "tabn ".g:lasttab<cr>
-vnoremap <silent><c-[> :exe "tabn ".g:lasttab<cr>
+" nnoremap <silent><c-[> :exe \"tabn ".g:lasttab<cr>
+" vnoremap <silent><c-[> :exe \"tabn ".g:lasttab<cr>
 
 " Jump to nvim config file
 noremap <silent> <leader>rc :e $HOME/.config/nvim/init.vim<CR>

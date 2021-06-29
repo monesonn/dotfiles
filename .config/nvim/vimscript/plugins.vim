@@ -26,6 +26,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
+Plug 'ajouellette/sway-vim-syntax',
 " {{ File browsers }}
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/NERDTree'
@@ -37,6 +38,7 @@ Plug 'yuttie/hydrangea-vim'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'joshglendenning/vim-caddyfile'
 " Plug 'sheerun/vim-polyglot'
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
