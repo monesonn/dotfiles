@@ -11,3 +11,7 @@
 
 .vim/autoload/
 .vim/plugged/
+
+# Sway
+
+.config/sway/scripts/autotiling
