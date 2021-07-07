@@ -2,7 +2,8 @@
 # set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
 exec {
-    python ~/.config/sway/scripts/autotiling/main.py # or use autotiling instead
+    autotiling
+    # python ~/.config/sway/scripts/autotiling/main.py
     # mkfifo $SWAYSOCK.wob && tail -f $WOBSOCK | wob
     # oguri
 }
