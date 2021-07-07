@@ -1,13 +1,13 @@
 {
   // GENERAL
-  "layer": "top",
+  "layer": "bottom",
   "position": "top",
-  // "height": 10,
+  "height": 10,
 
   "modules-left": [
     "custom/media",
     "custom/weather",
-    "custom/dnf",
+    "custom/pacman",
     "custom/uptime",
     "tray",
     "sway/mode"
@@ -35,7 +35,7 @@
   "battery": {
     "interval": 10,
     "states": {
-      "warning": 30,
+      "warning": 25,
       "critical": 15
     },
     // Connected to AC
@@ -101,6 +101,15 @@
     "tooltip": false
   },
 
+  "custom/pacman": {
+        "format": " {} ",
+        "interval": 3600,                     // every hour
+        "exec": "pacman -Qu | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "alacritty -e paru -Syu; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8
+  },
+
   "memory": {
     "interval": 5,
     "format": "mem:{}%", // Icon: memory
@@ -132,20 +141,20 @@
   "sway/workspaces": {
     "all-outputs": false,
     "disable-scroll": true,
-    "format": "{icon}",
-    "format-icons": {
-      "0": "〇",
-      "1": "一",
-      "2": "二",
-      "3": "三",
-      "4": "四",
-      "5": "五",
-      "6": "六",
-      "7": "七",
-      "8": "八",
-      "9": "九",
-      "10": "十"
-    }
+    //"format": "{icon}",
+    //"format-icons": {
+    //  "0": "〇",
+    //  "1": "一",
+    //  "2": "二",
+    //  "3": "三",
+    //  "4": "四",
+    //  "5": "五",
+    //  "6": "六",
+    //  "7": "七",
+    //  "8": "八",
+    //  "9": "九",
+    //  "10": "十"
+    //}
   },
 
   "temperature": {
@@ -200,20 +209,29 @@
   "custom/uptime": {
     "exec": "uptime | cut -d ',' -f1  | cut -d ' ' -f4,5",
     "interval": 60,
-    "format": "up: {}",
+    "format": "up:{}",
     "tooltip": false
   },
 
   "custom/bluetooth": {
     "format": "{icon}",
     "format-icons": {
-      "yes": "",
-      "no": "",
-      "default": ""
+      "yes": " ",
+      "no": " "
     },
     "exec": "bluetoothctl show | grep -i powered | cut -d: -f2- | tr -d ' '",
     "tooltip": false
   },
+
+
+"custom/scratchpad-indicator": {
+    "interval": 3,
+    "return-type": "json",
+    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
+    "format": "{} 🗗",
+    "on-click": "exec swaymsg 'scratchpad show'",
+    "on-click-right": "exec swaymsg 'move scratchpad'"
+},
 
   "tray": {
     "icon-size": 8,

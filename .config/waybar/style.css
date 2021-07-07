@@ -50,7 +50,7 @@ window .modules-center #workspaces {
 #workspaces button {
   color: #7f7f7f;
   min-height: 0;
-  min-width: 15px;
+  min-width: 10px;
   border-radius: 0;
   box-shadow: none;
   text-shadow: none;
