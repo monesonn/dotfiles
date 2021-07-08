@@ -9,10 +9,13 @@
     "custom/weather",
     "custom/pacman",
     "custom/uptime",
+    "custom/scratchpad-indicator",
     "tray",
     "sway/mode"
   ],
-  "modules-center": ["sway/workspaces"],
+  "modules-center": [
+    "sway/workspaces",
+  ],
   "modules-right": [
     "backlight",
     "pulseaudio",
@@ -49,13 +52,15 @@
       "", // Icon: battery-quarter
       "" // Icon: battery-empty
     ],
+    "tooltip-format": "{}\nBattery health: ",
     "tooltip": true
   },
 
   "clock#time": {
     "interval": 1,
     "format": " {:%H:%M:%S}",
-    "tooltip-format": "{:%A, %e %B %Y}"
+    "tooltip-format": "{:%A, %e %B %Y}",
+    "on-click-right": "alacritty -e calcurse"
   },
 
   "cpu": {
@@ -85,7 +90,7 @@
 
   "custom/weather": {
     "exec": "curl 'wttr.in/?format=%t'",
-    "exec-if": "command -v curl 1>/dev/null",
+    "exec-if": "command -v curl 1>/dev/null && sleep 5",
     "format": "w: {}",
     "interval": 3600,
     "tooltip": false
@@ -102,7 +107,7 @@
   },
 
   "custom/pacman": {
-        "format": " {} ",
+        "format": " {}",
         "interval": 3600,                     // every hour
         "exec": "pacman -Qu | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
@@ -172,9 +177,11 @@
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-muted": "婢",
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{icon} {volume}% {format_source}",
+    "format-muted": "婢  {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -185,7 +192,8 @@
       "default": ["", ""]
     },
     "scroll-step": 1,
-    "on-click": "pavucontrol"
+    "tooltip": false,
+    "on-click-right": "pavucontrol"
   },
 
   "backlight": {
@@ -209,7 +217,7 @@
   "custom/uptime": {
     "exec": "uptime | cut -d ',' -f1  | cut -d ' ' -f4,5",
     "interval": 60,
-    "format": "up:{}",
+    "format": "up: {}",
     "tooltip": false
   },
 
@@ -228,7 +236,7 @@
     "interval": 3,
     "return-type": "json",
     "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
-    "format": "{} 🗗",
+    "format": "🗗 {}",
     "on-click": "exec swaymsg 'scratchpad show'",
     "on-click-right": "exec swaymsg 'move scratchpad'"
 },

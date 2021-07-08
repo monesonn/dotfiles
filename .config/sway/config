@@ -80,6 +80,11 @@ input "1267:12363:ELAN469D:00_04F3:304B_Touchpad" {
     pointer_accel 0.7
 }
 
+input "1267:12363:ELAN469D:00_04F3:304B_Mouse" {
+    pointer_accel 1
+    accel_profile adaptive
+}
+
 input * {
     xkb_layout "us,ru"
     xkb_variant "cz_sk_de,ruu"
@@ -104,7 +109,7 @@ bindsym $mod+shift+q exec xkill
 # Start your launcher
 bindsym $mod+d exec $bemenu
 bindsym $mod+o exec $drun
-bindsym $mod+p exec $menu
+bindsym $mod+p exec $bemenu
 bindsym $mod+shift+Return exec $run
 
 
