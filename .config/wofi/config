@@ -1,6 +1,9 @@
-height=10px
+height=100%
 width=100%
-xoffset=0px
+xoffset=0
+yoffset=0
+
+orientation=vertical
 
 allow_images=true
 allow_markup=true
@@ -13,11 +16,12 @@ dynamic_lines=true
 colors=colors
 filter_rate=100
 no_actions=true
+
 hide_scroll=true
+//hide_search=true
 
 promt=
 
-orientation=horizontal
 content_halign=fill
 halign=fill
 
