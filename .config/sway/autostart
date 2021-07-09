@@ -1,16 +1,17 @@
 ### Autostart
+
 # set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+# exec mkfifo $SWAYSOCK.wob && tail -f $WOBSOCK | wob
 
 exec {
     autotiling
-    # python ~/.config/sway/scripts/autotiling/main.py
-    # mkfifo $SWAYSOCK.wob && tail -f $WOBSOCK | wob
+    ~/.config/sway/scripts/import-gsettings.sh
     # oguri
 }
 
 exec_always {
     mako
-    # ogurictl output '*' --image ~/pictures/gif/windmill_dimmed.gif
     # python /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.90
+    # ogurictl output '*' --image path/picture
     # mpd ~/.config/mpd/mpd.conf
 }
