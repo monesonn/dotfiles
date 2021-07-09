@@ -1,13 +1,13 @@
 /* remove window title from Client-Side Decorations */
 .solid-csd headerbar .title {
-    font-size: 0;
+  font-size: 0;
 }
 
 /* hide extra window decorations/double border */
 window decoration {
-    margin: 0;
-    border: none;
-    padding: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
 }
 
 window.ssd separator:first-child + headerbar:backdrop,
@@ -44,76 +44,99 @@ window.ssd headerbar.titlebar button.titlebutton {
 /*** TERMINAL ***/
 
 terminal-screen-container box {
-	padding: 30px;
+  padding: 30px;
 }
 
 terminal-window {
-	background-color: #1e1e1e;
-	border-radius: 0 0 8px 8px;
+  background-color: #1e1e1e;
+  border-radius: 0 0 8px 8px;
 }
 
 terminal-window decoration {
-	border-radius: 8px;
+  border-radius: 8px;
 }
 
 /*** NAUTILUS ***/
 
 window decoration {
-	border-radius: 8px;
+  border-radius: 8px;
 }
 
 window {
-	border-radius: 0 0 8px 8px;
+  border-radius: 0 0 8px 8px;
 }
 
 window.nautilus-window grid paned box placessidebar viewport list {
-	background-color: rgba(180, 180, 180, 0.05);
-	border-radius: 0 0 8px 8px;
+  background-color: rgba(180, 180, 180, 0.05);
+  border-radius: 0 0 8px 8px;
 }
 
-window.nautilus-window grid paned overlay notebook stack, window.nautilus-window grid paned overlay notebook, window.nautilus-window grid paned overlay scrolledwindow treeview {
-	border-radius: 0 0 8px 8px;
+window.nautilus-window grid paned overlay notebook stack,
+window.nautilus-window grid paned overlay notebook,
+window.nautilus-window grid paned overlay scrolledwindow treeview {
+  border-radius: 0 0 8px 8px;
 }
 
 window.nautilus-window grid paned box placessidebar {
-	background-color: rgba(0,0,0,0);
-	border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 8px;
 }
 
 /*** SETTINGS ***/
 
-leaflet box scrolledwindow, leaflet box scrolledwindow viewport stack list {
-	border-radius: 0 0 0 8px;
+leaflet box scrolledwindow,
+leaflet box scrolledwindow viewport stack list {
+  border-radius: 0 0 0 8px;
 }
 
 leaflet box scrolledwindow viewport stack list {
-	background-color: rgba(255, 255, 255, 0.0);
+  background-color: rgba(255, 255, 255, 0);
 }
 
 leaflet stack {
-	border-radius: 0 0 8px 0;
+  border-radius: 0 0 8px 0;
 }
 
 /*** TWEAKS ***/
 
 list.tweak-categories {
-	border-radius: 0 0 0 8px;
+  border-radius: 0 0 0 8px;
 }
 
 /*** EVINCE ***/
 
-evview, iconview {
-	border-radius: 0 0 8px 8px;
+evview,
+iconview {
+  border-radius: 0 0 8px 8px;
 }
 
 /*** APOSTROPHE ***/
 
 .apostrophe-window.focus {
-	border-radius: 8px;
+  border-radius: 8px;
 }
 
 /*** SIDEBAR LIST ***/
 
 list.sidebar {
-	border-radius: 0 0 0 8px;
+  border-radius: 0 0 0 8px;
+}
+
+/* Always use background color */
+GtkWindow {
+  background-color: @theme_bg_color;
+}
+
+/* Fix tooltip background override */
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.tooltip * {
+  background-color: transparent;
+}
+
+/* Fix Nautilus desktop window background override */
+NautilusWindow {
+  background-color: transparent;
 }
