@@ -30,7 +30,7 @@ set $browser firefox
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $dmenu dmenu_path | dmenu | xargs swaymsg exec --
-set $bemenu bemenu-run --ignorecase --prompt="exec >" -w -H 14 --hf='#5f88b0' --nf='#7f7f7f' --tf='#7f7f7f' --ff '#7f7f7f' --fn 'cozette 10' --tb '#000000' --fb='#000000' --nb='#000000'
+set $bemenu bemenu-run --ignorecase --prompt="exec >" -w -H 14 --hf='#5f88b0' --nf='#7f7f7f' --tf='#7f7f7f' --ff '#7f7f7f' --fn 'cozette 10' --tb '#000000' --fb='#000000' --nb='#000000' --hb='#000000'
 
 set $menu dmenu_path | wofi -b --dmenu -i | xargs swaymsg exec --
 set $drun wofi -b --show drun -i | xargs swaymsg exec --
@@ -85,7 +85,7 @@ input "1267:12363:ELAN469D:00_04F3:304B_Mouse" {
     accel_profile adaptive
 }
 
-input * {
+input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout "us,ru"
     xkb_variant "cz_sk_de,ruu"
     xkb_options "grp:alt_shift_toggle"
@@ -331,7 +331,7 @@ bar {
     # The default just shows the current date and time.
 
     # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-    status_command while ~/.config/sway/scripts/status.sh; do sleep 1; done
+    # status_command while ~/.config/sway/scripts/status.sh; do sleep 1; done
 
     colors {
         # statusline #ffffff
