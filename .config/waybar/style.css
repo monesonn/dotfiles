@@ -68,6 +68,7 @@ window .modules-center #workspaces {
 #clock,
 #network,
 #cpu,
+#tray,
 #memory,
 #backlight,
 #keyboard,
@@ -80,15 +81,10 @@ window .modules-center #workspaces {
 #custom-media,
 #custom-power,
 #custom-bluetooth,
-#custome-uptime,
+#custom-uptime,
 #battery {
   padding: 0 5px;
   margin: 0 1px;
-}
-
-#tray {
-  padding: 0 5px;
-  margin: 0 10px;
 }
 
 #mode {
@@ -98,7 +94,8 @@ window .modules-center #workspaces {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  margin: 0 10px;
+  padding: 0 5px;
+  margin: 0 1px;
   color: red;
 }
 

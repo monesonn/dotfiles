@@ -6,25 +6,24 @@
 
   "modules-left": [
     "custom/media",
-    "custom/weather",
     "custom/pacman",
+    "cpu",
+    "memory",
     "custom/uptime",
-    "custom/scratchpad-indicator",
-    "tray",
-    "sway/mode"
+    "tray"
   ],
   "modules-center": [
     "sway/workspaces",
+    "custom/scratchpad-indicator",
+    "sway/mode"
   ],
   "modules-right": [
-    "backlight",
-    "pulseaudio",
-    "cpu",
-    "memory",
     "network",
+    "pulseaudio",
+    "backlight",
     "custom/bluetooth",
-    "custom/keyboard-layout",
     "battery",
+    "custom/keyboard-layout",
     "clock#time",
     "custom/power"
   ],
@@ -79,6 +78,7 @@
     "format": " {}", // Icon: keyboard
     // Signal sent by Sway key binding (~/.config/sway/key-bindings)
     "signal": 1, // SIGHUP
+    "on-click": "swaymsg input '1:1:AT_Translated_Set_2_keyboard' xkb_switch_layout next",
     "tooltip": false
   },
 
@@ -91,7 +91,7 @@
   "custom/weather": {
     "exec": "curl 'wttr.in/?format=%t'",
     "exec-if": "command -v curl 1>/dev/null && sleep 5",
-    "format": "w: {}",
+    "format": "w:{}",
     "interval": 3600,
     "tooltip": false
   },
@@ -107,12 +107,12 @@
   },
 
   "custom/pacman": {
-        "format": " {}",
-        "interval": 3600,                     // every hour
-        "exec": "pacman -Qu | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "alacritty -e paru -Syu; pkill -SIGRTMIN+8 waybar", // update system
-        "signal": 8
+    "format": " {}",
+    "interval": 3600, // every hour
+    "exec": "pacman -Qu | wc -l", // # of updates
+    "exec-if": "exit 0", // always run; consider advanced run conditions
+    "on-click": "alacritty -e paru -Syu; pkill -SIGRTMIN+8 waybar", // update system
+    "signal": 8
   },
 
   "memory": {
@@ -138,14 +138,9 @@
     "tooltip": false
   },
 
-  "sway/window": {
-    "format": "{}",
-    "max-length": 120
-  },
-
   "sway/workspaces": {
     "all-outputs": false,
-    "disable-scroll": true,
+    "disable-scroll": true
     //"format": "{icon}",
     //"format-icons": {
     //  "0": "〇",
@@ -209,7 +204,7 @@
       "Playing": " ",
       "Paused": " "
     },
-    "max-length": 30,
+    "max-length": 20,
     "exec": "playerctl metadata --format '{\"text\": \"{{title}}\", \"tooltip\": \"{{playerName}} : {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
     "on-click": "playerctl play-pause"
   },
@@ -217,7 +212,7 @@
   "custom/uptime": {
     "exec": "uptime | cut -d ',' -f1  | cut -d ' ' -f4,5",
     "interval": 60,
-    "format": "up: {}",
+    "format": "↑{}",
     "tooltip": false
   },
 
@@ -231,18 +226,17 @@
     "tooltip": false
   },
 
-
-"custom/scratchpad-indicator": {
+  "custom/scratchpad-indicator": {
     "interval": 3,
     "return-type": "json",
     "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
-    "format": "🗗 {}",
+    "format": ": {}",
     "on-click": "exec swaymsg 'scratchpad show'",
     "on-click-right": "exec swaymsg 'move scratchpad'"
-},
+  },
 
   "tray": {
-    "icon-size": 8,
+    "icon-size": 9,
     "spacing": 10
   }
 }
