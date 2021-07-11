@@ -83,6 +83,7 @@ alias \
 
 # 1-letter
 alias \
+    p="pacman" \
     c="clear" \
     clr="clear" \
     t="touch" \
