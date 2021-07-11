@@ -5,6 +5,8 @@
 
 # Read `man 5 sway` for a complete reference.
 
+xwayland disabled
+
 # font pango: monospace
 # font pango: TerminessTTF Nerd Font Mono 11
 font pango: Cozette Medium 11
@@ -36,8 +38,6 @@ set $menu dmenu_path | wofi -b --dmenu -i | xargs swaymsg exec --
 set $drun wofi -b --show drun -i | xargs swaymsg exec --
 set $run wofi -b --show run -i | xargs swaymsg exec --
 
-xwayland enabled
-
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -45,7 +45,7 @@ xwayland enabled
 
 # output eDP-1 bg #000000 solid_color
 # output eDP-1 bg #304B58 solid_color
-output eDP-1 bg ~/pic/bg/1.png fill
+output eDP-1 bg ~/pic/bw/christopher-baumeister-ZhGGLxPcO_M-unsplash.jpg fill
 
 # Example configuration:
 #

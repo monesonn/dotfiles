@@ -1,3 +1,8 @@
+* {
+  font-family: cozette, terminus, monospace;
+  background-color: transparent;
+}
+
 #window {
   margin: 0;
   padding: 0;
@@ -9,7 +14,6 @@
   margin: 0;
   border: none;
   box-shadow: none;
-  background-color: transparent;
 }
 
 #inner-box {
@@ -45,7 +49,6 @@
 
 #entry:selected {
   border: none;
-  background-color: transparent;
 }
 
 #entry:selected #text {

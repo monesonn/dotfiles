@@ -20,7 +20,7 @@ no_actions=true
 hide_scroll=true
 //hide_search=true
 
-promt=
+prompt=Type application
 
 content_halign=fill
 halign=fill
