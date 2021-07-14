@@ -25,8 +25,9 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-set $term alacritty
+
+# Preferred terminal emulator: foot or alacritty
+set $term foot
 set $browser firefox
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -45,7 +46,7 @@ set $run wofi -b --show run -i | xargs swaymsg exec --
 
 # output eDP-1 bg #000000 solid_color
 # output eDP-1 bg #304B58 solid_color
-output eDP-1 bg ~/pic/bw/christopher-baumeister-ZhGGLxPcO_M-unsplash.jpg fill
+output eDP-1 bg ~/pic/bw/dcd.png fill
 
 # Example configuration:
 #
@@ -347,11 +348,11 @@ bar {
 }
 
 # Screenshot
-bindsym --release Print exec "grim ${XDG_CONFIG_PICTURES:-$HOME/pic}/$(date +'%s_grim.png')"
+bindsym --release Print exec "grim ${XDG_CONFIG_PICTURES:-$HOME/pic}/$(date +'%s_grim.png') && notify-send 'Screenshot is ready.'"
 bindsym shift+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym ctrl+Print exec "grim - | wl-copy"
-bindsym $mod+Print exec "wf-recorder --audio bluez_output.A8_4D_4A_F4_63_99.a2dp-sink -f ${XDG_CONFIG_VIDEOS:-$HOME/vid}/recording_$(date +\"%Y-%m-%d_%H:%M:%S.mp4\")"
-bindsym ctrl+$mod+shift+Print exec wf-recorder -g "$(slurp)" -f ~/vid/screencast/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
+bindsym $mod+Print exec "notify-send -t 3000 'Video recording will start after 3 seconds.' && sleep 3 && wf-recorder -f ${XDG_CONFIG_VIDEOS:-$HOME/vid}/recording_$(date + '%Y-%m-%d_%H:%M:%S.mp4')"
+bindsym ctrl+$mod+shift+Print exec "notify-send -t 3000 'Video recording will start after 3 seconds.' && sleep 3 && wf-recorder -g \"$(slurp)\" -f ~/video/screencast/recording_$(date +'%Y-%m-%d_%H:%M:%S.mp4')"
 bindsym $mod+shift+Print exec killall -s SIGINT wf-recorder
 
 set $power_mode "power"
@@ -451,7 +452,7 @@ bindsym $mod+Tab workspace next
 bindsym $mod+shift+Tab workspace prev
 
 bindsym $mod+b exec $browser
-bindsym $mod+m exec $term -e htop
+bindsym $mod+m exec $term sh -c "htop"
 bindsym $mod+t exec /$HOME/app/telegram/Telegram
 
 # Apps Launched with <SUPER> + <KEYPAD 1-9>
@@ -477,9 +478,9 @@ bindsym $mod+t exec /$HOME/app/telegram/Telegram
 # bindsym $mod+shift+KP_9 exec $term -e
 
 # Apps Launched with <SUPER> + <CTRL> + <KEYPAD 1-9>
-bindsym $mod+ctrl+KP_End exec $term -e htop
-bindsym $mod+ctrl+KP_Down exec $term -e cmatrix -C cyan
-bindsym $mod+ctrl+KP_Page_Down exec $term -e cmus
+bindsym $mod+ctrl+KP_End exec $term sh -c "htop"
+bindsym $mod+ctrl+KP_Down exec $term sh -c "cmatrix -C cyan"
+bindsym $mod+ctrl+KP_Page_Down exec $term sh -c "cmus"
 # bindsym $mod+ctrl+KP_Left exec $term -e
 bindsym $mod+ctrl+KP_Begin exec $term -e nvim ~/.config/sway/config
 # bindsym $mod+ctrl+KP_Right exec $term -e

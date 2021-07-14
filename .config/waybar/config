@@ -84,7 +84,7 @@
   },
 
   "custom/power": {
-    "format": "⏻",
+    "format": "",
     "on-click": "nwgbar",
     "tooltip": false
   },
@@ -129,7 +129,7 @@
     "interval": 5,
     "format-wifi": " {ipaddr}/{cidr}", // Icon: wifi
     "format-ethernet": " {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-    "format-disconnected": "⚠  Disconnected",
+    "format-disconnected": "⚠ Disconnected",
     "tooltip-format-wifi": "ifname:\t{ifname}\nessid:\t{essid}\nsignal:\t{signalStrength}%",
     "tooltip-format-ethernet": "{ifname} "
   },
@@ -142,19 +142,19 @@
   "sway/workspaces": {
     "all-outputs": false,
     "disable-scroll": true,
-    "format": "{name}",
+    "format": "{icon}",
     "format-icons": {
-      "0": "〇",
-      "1": "一",
-      "2": "二",
-      "3": "三",
-      "4": "四",
-      "5": "五",
-      "6": "六",
-      "7": "七",
-      "8": "八",
-      "9": "九",
-      "10": "十"
+      "0": "0",
+      "1": "αʹ",
+      "2": "βʹ",
+      "3": "γʹ",
+      "4": "δʹ",
+      "5": "εʹ",
+      "6": "ϛʹ",
+      "7": "ζʹ",
+      "8": "ηʹ",
+      "9": "θʹ",
+      "10": "Ιʹ"
     }
   },
 
