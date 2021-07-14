@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+name=$(bemenu --ignorecase --prompt='search >' -w -H 14 --hf='#5f88b0' --nf='#7f7f7f' --tf='#7f7f7f' --ff '#7f7f7f' --fn 'cozette 10' --tb '#000000' --fb='#000000' --nb='#000000' --hb='#000000' </dev/null)
+
+search() {
+    local bemenu="bemenu --list 30 --ignorecase --prompt='select item |' --prefix='>' --wrap --hf='#5f88b0' --nf='#7f7f7f' --tf='#7f7f7f' --ff '#7f7f7f' --fn 'cozette 10' --tb '#000000' --fb='#000000' --nb='#000000' --hb='#000000'"
+
+    local url=$(YTFZF_EXTMENU=" $bemenu"  ytfzf -LD "${name}")
+    if [[ -n $url ]]; then
+        pgrep mpv && pkill mpv
+        nohup mpv --no-video $url </dev/null >/dev/null 2>&1 &
+    else
+        notify-send "Nothing to play."
+    fi
+}
+
+search $name
