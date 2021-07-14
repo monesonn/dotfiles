@@ -27,7 +27,7 @@ set $up k
 set $right l
 
 # Preferred terminal emulator: foot or alacritty
-set $term foot
+set $term footclient
 set $browser firefox
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -438,6 +438,9 @@ bindsym --locked shift+XF86MonBrightnessDown exec light -U 10 # Decrease screen 
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked $mod+XF86AudioNext exec playerctl position 5+
+bindsym --locked $mod+XF86AudioPrev exec playerctl position 5-
+bindsym --locked $mod+XF86AudioPlay exec notify-send "$(playerctl metadata --format 'Now playing: {{title}} - {{duration(position)}}')"
 # bindsym XF86AudioStop  exec "mpc stop"
 # bindsym XF86AudioPause exec "mpc pause"
 
@@ -454,6 +457,9 @@ bindsym $mod+shift+Tab workspace prev
 bindsym $mod+b exec $browser
 bindsym $mod+m exec $term sh -c "htop"
 bindsym $mod+t exec /$HOME/app/telegram/Telegram
+bindsym $mod+y exec /$HOME/.local/bin/ytlisten
+bindsym $mod+shift+y exec pkill mpv
+
 
 # Apps Launched with <SUPER> + <KEYPAD 1-9>
 # bindsym $mod+KP_End exec $term -e
@@ -489,6 +495,5 @@ bindsym $mod+ctrl+KP_Begin exec $term -e nvim ~/.config/sway/config
 # bindsym $mod+ctrl+KP_Page_Up exec $term -e
 
 # change borders
-bindsym $mod+shift+y border none
-bindsym $mod+shift+u border pixel 1
-bindsym $mod+shift+i border pixel 2
+bindsym $mod+ctrl+shift+b border none
+bindsym $mod+shift+b border pixel 2

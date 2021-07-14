@@ -6,6 +6,7 @@
 exec {
     autotiling
     ~/.config/sway/scripts/import-gsettings.sh
+    ~/.config/sway/scripts/foot-server.sh
     # oguri
 }
 
